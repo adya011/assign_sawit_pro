@@ -16,6 +16,8 @@ class WeighingListFragment : Fragment() {
     private var _binding: FragmentWeighingListBinding? = null
     private val binding get() = _binding!!
 
+    private var weighingAdapter: WeighingListAdapter? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,19 +30,23 @@ class WeighingListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchWeighingList()
-
-        /*val map: Map<String, TruckDataEntity> = mapOf(
-            "-Nr1DQZKrjc-gfcJbQCE" to TruckDataEntity(
-                date = "asd",
-                driverName = "asdasd",
-                id = "1",
-                licenseNumber = "123"
-            )
-        )*/
+        setupObserver()
+        setupAdapter()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun setupAdapter() {
+        weighingAdapter = WeighingListAdapter {  }
+        binding.rvWeighing.adapter = weighingAdapter
+    }
+
+    private fun setupObserver() {
+        viewModel.weighingListLiveData.observe(viewLifecycleOwner) {
+            weighingAdapter?.submitList(it)
+        }
     }
 }

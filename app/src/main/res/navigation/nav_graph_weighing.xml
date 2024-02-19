@@ -5,7 +5,10 @@
 
     <fragment
         android:id="@+id/fragment_weighing_list"
-        android:name="com.sawitpro.weightbridge.ui.feature.list.WeighingListFragment">
-    </fragment>
+        android:name="com.sawitpro.weightbridge.ui.feature.list.WeighingListFragment"></fragment>
+
+    <fragment
+        android:id="@+id/fragment_weighing_detail"
+        android:name="com.sawitpro.weightbridge.ui.feature.detail.WeighingDetailFragment"></fragment>
 
 </navigation>

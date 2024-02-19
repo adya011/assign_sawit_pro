@@ -25,7 +25,8 @@ class WeighingListAdapter(val onClick: (String) -> Unit) :
         private val binding: ItemWeighingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: TruckDataEntity) = with(binding) {
-            val a: Map<String, String> = mapOf("asd" to "aqwe", "asd" to "qwe")
+            //val a: Map<String, String> = mapOf("asd" to "aqwe", "asd" to "qwe")
+            tvTicket.text = item.driverName
         }
     }
 
