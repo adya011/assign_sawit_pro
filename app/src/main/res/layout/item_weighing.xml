@@ -1,18 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="8dp"
+        android:elevation="8dp">
 
-        <TextView
-            android:id="@+id/tv_ticket"
-            android:layout_margin="12dp"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Driver Name" />
+            android:paddingHorizontal="12dp"
+            android:paddingBottom="14dp">
+
+            <TextView
+                android:id="@+id/tv_driver_name"
+                style="@style/SawitPro.PageTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Driver Name" />
+
+            <TextView
+                android:id="@+id/tv_license_num"
+                style="@style/SawitPro.SubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_driver_name"
+                tools:text="License Number" />
+
+            <TextView
+                android:id="@+id/tv_date_time"
+                style="@style/SawitPro.Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_license_num"
+                tools:text="13 Dec 23" />
+
+            <View
+                android:id="@+id/v_div"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="#DDDEE6"
+                app:layout_constraintTop_toBottomOf="@id/tv_date_time" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/avenir_next_demi_medium"
+                android:text="Edit"
+                android:textColor="@color/green_sawit_pro"
+                app:layout_constraintBottom_toBottomOf="@id/iv_edit"
+                app:layout_constraintEnd_toStartOf="@id/iv_edit"
+                app:layout_constraintTop_toTopOf="@id/iv_edit" />
+
+            <ImageView
+                android:id="@+id/iv_edit"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_div" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

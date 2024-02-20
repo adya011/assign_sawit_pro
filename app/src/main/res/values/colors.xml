@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green_sawit_pro">#506D4A</color>
+    <color name="textPrimary">#1A2258</color>
+    <color name="textSecondary">#787D9C</color>
+    <color name="light_grey">#F3F3F3</color>
 </resources>

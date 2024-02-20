@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SawitPro.Widget.AppBar" parent="@style/Widget.MaterialComponents.ActionBar.Primary">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="SawitPro.Bold" parent="@style/TextAppearance.AppCompat.Body1">
+        <!--<item name="android:fontFamily">@font/avenir_next_demi</item>-->
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SawitPro.PageTitle" parent="SawitPro.Bold">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingMultiplier">1.15</item>
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+    <style name="SawitPro.SubTitle" parent="SawitPro.Bold">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingMultiplier">1.25</item>
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+    <style name="SawitPro.Label" parent="SawitPro.Bold">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingMultiplier">1.15</item>
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+</resources>

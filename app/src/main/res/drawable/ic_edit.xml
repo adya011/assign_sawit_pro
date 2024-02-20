@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M7.63,20.78H4.22V17.36C4.2325,16.8493 4.44,16.3627 4.8,16L16.24,4.5201C16.4257,4.3341 16.6463,4.1866 16.8891,4.0859C17.1319,3.9853 17.3921,3.9335 17.655,3.9335C17.9178,3.9335 18.1781,3.9853 18.4208,4.0859C18.6636,4.1866 18.8842,4.3341 19.07,4.5201L20.52,5.93C20.7059,6.1158 20.8534,6.3364 20.9541,6.5792C21.0547,6.822 21.1065,7.0822 21.1065,7.345C21.1065,7.6079 21.0547,7.8681 20.9541,8.1109C20.8534,8.3537 20.7059,8.5743 20.52,8.76L9.04,20.19C8.6666,20.5656 8.1595,20.7778 7.63,20.78V20.78Z"
+        android:strokeLineJoin="round"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:strokeColor="@color/green_sawit_pro"
+        android:strokeLineCap="round"/>
+    <path
+        android:pathData="M14.14,6.66L18.36,10.88"
+        android:strokeLineJoin="round"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:strokeColor="@color/green_sawit_pro"
+        android:strokeLineCap="round"/>
+</vector>

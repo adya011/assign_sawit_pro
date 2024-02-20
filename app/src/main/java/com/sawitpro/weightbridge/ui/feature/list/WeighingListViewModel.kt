@@ -8,6 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.sawitpro.weightbridge.data.core.DataResult
 import com.sawitpro.weightbridge.data.model.entity.TruckDataEntity
 import com.sawitpro.weightbridge.domain.repository.WeighBridgetRepository
+import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_ERROR
+import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_LOADING
+import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_SUCCESS
 import kotlinx.coroutines.launch
 
 class WeighingListViewModel(
@@ -17,21 +20,28 @@ class WeighingListViewModel(
     private val _weighingListLiveData: MutableLiveData<List<TruckDataEntity>> = MutableLiveData()
     val weighingListLiveData: LiveData<List<TruckDataEntity>> get() = _weighingListLiveData
 
+    private val _displayStateLiveData: MutableLiveData<Int> = MutableLiveData()
+    val displayStateLiveData: LiveData<Int> get() = _displayStateLiveData
+
+    private val _errorMessageLiveData: MutableLiveData<String> = MutableLiveData()
+    val errorMessageLiveData: LiveData<String> get() = _errorMessageLiveData
+
     fun fetchWeighingList() {
         viewModelScope.launch {
             repository.getWeighingList().collect { result ->
                 when (result) {
                     is DataResult.Loading -> {
-                        Log.d("nandaDebug", "loading...")
+                        _displayStateLiveData.value = CHILD_INDEX_LOADING
                     }
 
                     is DataResult.Success -> {
-                        Log.d("nandaDebug", "success, ${result.body}")
+                        _displayStateLiveData.value = CHILD_INDEX_SUCCESS
                         _weighingListLiveData.postValue(result.body)
                     }
 
                     is DataResult.Error -> {
-                        Log.d("nandaDebug", "error, message: ${result.errorMessage}")
+                        _displayStateLiveData.value = CHILD_INDEX_ERROR
+                        _errorMessageLiveData.value = result.errorMessage
                     }
                 }
             }
