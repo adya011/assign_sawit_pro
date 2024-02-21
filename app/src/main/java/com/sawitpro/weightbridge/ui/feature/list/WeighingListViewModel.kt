@@ -17,8 +17,8 @@ class WeighingListViewModel(
     private val repository: WeighBridgetRepository
 ) : ViewModel() {
 
-    private val _weighingListLiveData: MutableLiveData<List<TruckDataEntity>> = MutableLiveData()
-    val weighingListLiveData: LiveData<List<TruckDataEntity>> get() = _weighingListLiveData
+    private val _weighingListLiveData: MutableLiveData<List<WeighingTicketEntity>> = MutableLiveData()
+    val weighingListLiveData: LiveData<List<WeighingTicketEntity>> get() = _weighingListLiveData
 
     private val _displayStateLiveData: MutableLiveData<Int> = MutableLiveData()
     val displayStateLiveData: LiveData<Int> get() = _displayStateLiveData
