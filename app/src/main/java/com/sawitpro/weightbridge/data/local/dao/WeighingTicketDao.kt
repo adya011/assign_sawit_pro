@@ -13,4 +13,7 @@ interface WeighingTicketDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWeighingTicket(weighingTicket: List<WeighingTicketEntity>)
+
+    @Query("SELECT * FROM weighing_ticket WHERE uId=:uId")
+    fun getWeighingTicketDetail(uId: String): WeighingTicketEntity
 }
