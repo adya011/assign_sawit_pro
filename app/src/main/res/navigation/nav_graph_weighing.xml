@@ -5,10 +5,23 @@
 
     <fragment
         android:id="@+id/fragment_weighing_list"
-        android:name="com.sawitpro.weightbridge.ui.feature.list.WeighingListFragment"></fragment>
+        android:name="com.sawitpro.weightbridge.ui.feature.list.WeighingListFragment">
+        <action
+            android:id="@+id/action_fragment_weighing_list_to_fragment_weighing_detail"
+            app:destination="@id/fragment_weighing_detail"></action>
+        <action
+            android:id="@+id/action_open_create_edit"
+            app:destination="@id/fragment_weighing_create_edit" />
+    </fragment>
 
     <fragment
         android:id="@+id/fragment_weighing_detail"
         android:name="com.sawitpro.weightbridge.ui.feature.detail.WeighingDetailFragment"></fragment>
+
+    <fragment
+        android:id="@+id/fragment_weighing_create_edit"
+        android:name="com.sawitpro.weightbridge.ui.feature.detail.WeighingCreateEditFragment">
+
+    </fragment>
 
 </navigation>
