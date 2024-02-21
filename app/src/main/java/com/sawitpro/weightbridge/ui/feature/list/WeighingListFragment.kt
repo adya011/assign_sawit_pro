@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.sawitpro.weightbridge.databinding.FragmentWeighingListBinding
+import com.sawitpro.weightbridge.ui.feature.base.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WeighingListFragment : Fragment() {
+class WeighingListFragment : BaseFragment() {
 
     private val viewModel by viewModel<WeighingListViewModel>()
 
