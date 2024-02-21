@@ -50,7 +50,12 @@ class WeighingEditViewModelTest : BaseTest() {
         viewModel.updateWeighingDetailLiveData.observeForever(updateWeighingObserver)
 
         val flowResult = flow { emit(DataResult.Success(mockUpdateWeighingResponse)) }
-        coEvery { weighingRepo.updateWeighingDetail(mockRequestWeighingTicket) } returns flowResult
+        coEvery {
+            weighingRepo.updateWeighingDetail(
+                mockUid,
+                mockRequestWeighingTicket
+            )
+        } returns flowResult
 
         /** Test start */
         viewModel.updateWeighingDetail(mockUid, mockRequestWeighingTicket)
@@ -96,7 +101,12 @@ class WeighingEditViewModelTest : BaseTest() {
                 )
             )
         }
-        coEvery { weighingRepo.updateWeighingDetail(mockRequestWeighingTicket) } returns flowResult
+        coEvery {
+            weighingRepo.updateWeighingDetail(
+                mockUid,
+                mockRequestWeighingTicket
+            )
+        } returns flowResult
 
         /** Test start */
         viewModel.updateWeighingDetail(mockUid, mockRequestWeighingTicket)
@@ -129,7 +139,12 @@ class WeighingEditViewModelTest : BaseTest() {
         viewModel.displayStateLiveData.observeForever(displayStateObserver)
 
         val flowResult = flow { emit(DataResult.Loading<UpdateWeighingTicketEntity>()) }
-        coEvery { weighingRepo.updateWeighingDetail(mockRequestWeighingTicket) } returns flowResult
+        coEvery {
+            weighingRepo.updateWeighingDetail(
+                mockUid,
+                mockRequestWeighingTicket
+            )
+        } returns flowResult
 
         /** Test start */
         viewModel.updateWeighingDetail(mockUid, mockRequestWeighingTicket)
