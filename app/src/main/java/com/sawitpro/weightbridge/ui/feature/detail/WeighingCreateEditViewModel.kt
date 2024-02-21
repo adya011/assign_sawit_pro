@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sawitpro.weightbridge.data.core.DataResult
-import com.sawitpro.weightbridge.data.model.entity.SetWeighingTicketResponseEntity
+import com.sawitpro.weightbridge.data.model.entity.RequestCreateEditWeighingTicketEntity
+import com.sawitpro.weightbridge.data.model.entity.SetWeighingTicketEntity
+import com.sawitpro.weightbridge.data.model.entity.UpdateWeighingTicketEntity
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.domain.repository.WeighBridgetRepository
 import com.sawitpro.weightbridge.util.Constant
@@ -15,11 +17,11 @@ class WeighingCreateEditViewModel(
     private val repository: WeighBridgetRepository
 ) : ViewModel() {
 
-    private val _setWeighingDetailLiveData: MutableLiveData<SetWeighingTicketResponseEntity> = MutableLiveData()
-    val setWeighingDetailLiveData: LiveData<SetWeighingTicketResponseEntity> get() = _setWeighingDetailLiveData
+    private val _setWeighingDetailLiveData: MutableLiveData<SetWeighingTicketEntity> = MutableLiveData()
+    val setWeighingDetailLiveData: LiveData<SetWeighingTicketEntity> get() = _setWeighingDetailLiveData
 
-    private val _updateWeighingDetailLiveData: MutableLiveData<WeighingTicketEntity?> = MutableLiveData()
-    val updateWeighingDetailLiveData: LiveData<WeighingTicketEntity?> get() = _updateWeighingDetailLiveData
+    private val _updateWeighingDetailLiveData: MutableLiveData<UpdateWeighingTicketEntity?> = MutableLiveData()
+    val updateWeighingDetailLiveData: LiveData<UpdateWeighingTicketEntity?> get() = _updateWeighingDetailLiveData
 
     private val _displayStateLiveData: MutableLiveData<Int> = MutableLiveData()
     val displayStateLiveData: LiveData<Int> get() = _displayStateLiveData
@@ -27,7 +29,7 @@ class WeighingCreateEditViewModel(
     private val _errorMessageLiveData: MutableLiveData<String> = MutableLiveData()
     val errorMessageLiveData: LiveData<String> get() = _errorMessageLiveData
 
-    fun setWeighingDetail(request: WeighingTicketEntity) {
+    fun setWeighingDetail(request: RequestCreateEditWeighingTicketEntity) {
         viewModelScope.launch {
             repository.setWeighingDetail(request).collect { result ->
                 when (result) {
@@ -49,7 +51,7 @@ class WeighingCreateEditViewModel(
         }
     }
 
-    fun updateWeighingDetail(request: WeighingTicketEntity) {
+    fun updateWeighingDetail(request: RequestCreateEditWeighingTicketEntity) {
         viewModelScope.launch {
             repository.updateWeighingDetail(request).collect { result ->
                 when (result) {

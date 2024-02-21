@@ -2,7 +2,9 @@ package com.sawitpro.weightbridge.domain.repository
 
 import com.sawitpro.weightbridge.data.core.DataResult
 import com.sawitpro.weightbridge.data.local.dao.WeighingTicketDao
-import com.sawitpro.weightbridge.data.model.entity.SetWeighingTicketResponseEntity
+import com.sawitpro.weightbridge.data.model.entity.RequestCreateEditWeighingTicketEntity
+import com.sawitpro.weightbridge.data.model.entity.SetWeighingTicketEntity
+import com.sawitpro.weightbridge.data.model.entity.UpdateWeighingTicketEntity
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.data.remote.api.WeighingApi
 import com.sawitpro.weightbridge.domain.mapper.SetWeighingDetailMapper
@@ -16,19 +18,24 @@ class WeighBridgeRepositoryImpl(
     private val localData: WeighingTicketDao
 ) : WeighBridgetRepository {
 
+    override suspend fun getWeighingDetail(uId: String): WeighingTicketEntity =
+        localData.getWeighingTicketDetail(uId)
+
     override suspend fun getWeighingList(): Flow<DataResult<List<WeighingTicketEntity>>> =
         dataSourceHandling(
             networkCall = { api.getWeighingList() },
-            mapper = WeighingListMapper()
+            mapper = WeighingListMapper(),
+            getFromDb = { localData.getWeighingTicketList() },
+            saveToDb = { localData.insertWeighingTicket(it) }
         )
 
-    override suspend fun setWeighingDetail(request: WeighingTicketEntity): Flow<DataResult<SetWeighingTicketResponseEntity>> =
+    override suspend fun setWeighingDetail(request: RequestCreateEditWeighingTicketEntity): Flow<DataResult<SetWeighingTicketEntity>> =
         dataSourceHandling(
             networkCall = { api.setWeighingList(request) },
             mapper = SetWeighingDetailMapper()
         )
 
-    override suspend fun updateWeighingDetail(request: WeighingTicketEntity): Flow<DataResult<WeighingTicketEntity>> =
+    override suspend fun updateWeighingDetail(request: RequestCreateEditWeighingTicketEntity): Flow<DataResult<UpdateWeighingTicketEntity>> =
         dataSourceHandling(
             networkCall = { api.updateWeighingList(request) },
             mapper = UpdateWeighingDetailMapper()

@@ -1,5 +1,5 @@
 package com.sawitpro.weightbridge.data.model.entity
 
-data class SetWeighingTicketResponseEntity(
+data class SetWeighingTicketEntity(
     val name: String
 )

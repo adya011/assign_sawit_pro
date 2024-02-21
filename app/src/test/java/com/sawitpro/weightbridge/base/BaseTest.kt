@@ -1,6 +1,7 @@
 package com.sawitpro.weightbridge.base
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.sawitpro.weightbridge.data.local.dao.WeighingTicketDao
 import com.sawitpro.weightbridge.domain.repository.WeighBridgetRepository
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
@@ -24,11 +25,13 @@ abstract class BaseTest {
     val testDispatchers = UnconfinedTestDispatcher()
 
     lateinit var weighingRepo: WeighBridgetRepository
+    lateinit var dao: WeighingTicketDao
 
     @Before
     open fun setup() {
         Dispatchers.setMain(testDispatchers)
         weighingRepo = mockk()
+        dao = mockk(relaxed = true)
     }
 
     @After

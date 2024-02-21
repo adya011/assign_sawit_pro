@@ -5,7 +5,9 @@ import com.sawitpro.weightbridge.base.BaseTest
 import com.sawitpro.weightbridge.data.core.DataResult
 import com.sawitpro.weightbridge.data.model.dto.SetWeighingResponseDto
 import com.sawitpro.weightbridge.data.model.dto.WeighingTicketDto
-import com.sawitpro.weightbridge.data.model.entity.SetWeighingTicketResponseEntity
+import com.sawitpro.weightbridge.data.model.entity.RequestCreateEditWeighingTicketEntity
+import com.sawitpro.weightbridge.data.model.entity.SetWeighingTicketEntity
+import com.sawitpro.weightbridge.data.model.entity.UpdateWeighingTicketEntity
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.data.remote.api.WeighingApi
 import com.sawitpro.weightbridge.domain.repository.WeighBridgeRepositoryImpl
@@ -23,8 +25,14 @@ import retrofit2.Response
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class WeighBridgeRepositoryTest : BaseTest() {
+
     private val weighingApi: WeighingApi = mockk(relaxed = true)
-    private val repo: WeighBridgeRepositoryImpl = WeighBridgeRepositoryImpl(weighingApi)
+    private lateinit var repo: WeighBridgeRepositoryImpl
+
+    override fun setup() {
+        super.setup()
+        repo = WeighBridgeRepositoryImpl(weighingApi, dao)
+    }
 
     @Test
     fun `get weighing list success - return weighing list`() = runTest {
@@ -64,7 +72,8 @@ class WeighBridgeRepositoryTest : BaseTest() {
                             licenseNumber = "AC 4321 DE",
                             date = "2024-02-09",
                             inboundWeight = 13,
-                            outboundWeight = 12
+                            outboundWeight = 12,
+                            netWeight = 1
                         ),
                         WeighingTicketEntity(
                             uId = "-Nr1DQZKrjc-gfcJbQCE",
@@ -72,7 +81,8 @@ class WeighBridgeRepositoryTest : BaseTest() {
                             licenseNumber = "AB 1234 CD",
                             date = "2024-02-09",
                             inboundWeight = 15,
-                            outboundWeight = 14
+                            outboundWeight = 14,
+                            netWeight = 1
                         )
                     )
                 ),
@@ -124,12 +134,13 @@ class WeighBridgeRepositoryTest : BaseTest() {
 
     @Test
     fun `set weighing detail success - return uId`() = runTest {
-        val mockRequestWeighingTicket = WeighingTicketEntity(
+        val mockRequestWeighingTicket = RequestCreateEditWeighingTicketEntity(
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
             inboundWeight = 13,
-            outboundWeight = 12
+            outboundWeight = 12,
+            netWeight = 1
         )
 
         coEvery {
@@ -144,13 +155,13 @@ class WeighBridgeRepositoryTest : BaseTest() {
 
         repo.setWeighingDetail(mockRequestWeighingTicket).test {
             assertEquals(
-                DataResult.Loading<SetWeighingTicketResponseEntity>(),
+                DataResult.Loading<SetWeighingTicketEntity>(),
                 awaitItem()
             )
 
             assertEquals(
                 DataResult.Success(
-                    SetWeighingTicketResponseEntity(
+                    SetWeighingTicketEntity(
                         name = "-NqxNttkoh63e0IITemA"
                     )
                 ),
@@ -171,12 +182,13 @@ class WeighBridgeRepositoryTest : BaseTest() {
     fun `set weighing detail error - return error`() = runTest {
         val mockErrorCode = 500
         val mockErrorMessage = "Response.error()"
-        val mockRequestWeighingTicket = WeighingTicketEntity(
+        val mockRequestWeighingTicket = RequestCreateEditWeighingTicketEntity(
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
             inboundWeight = 13,
-            outboundWeight = 12
+            outboundWeight = 12,
+            netWeight = 1
         )
 
         coEvery {
@@ -188,12 +200,12 @@ class WeighBridgeRepositoryTest : BaseTest() {
 
         repo.setWeighingDetail(mockRequestWeighingTicket).test {
             assertEquals(
-                DataResult.Loading<SetWeighingTicketResponseEntity>(),
+                DataResult.Loading<SetWeighingTicketEntity>(),
                 awaitItem()
             )
 
             assertEquals(
-                DataResult.Error<SetWeighingTicketResponseEntity>(mockErrorMessage, mockErrorCode),
+                DataResult.Error<SetWeighingTicketEntity>(mockErrorMessage, mockErrorCode),
                 awaitItem()
             )
 
@@ -209,12 +221,13 @@ class WeighBridgeRepositoryTest : BaseTest() {
 
     @Test
     fun `update weighing detail success - return weighing data`() = runTest {
-        val mockRequestWeighingTicket = WeighingTicketEntity(
+        val mockRequestWeighingTicket = RequestCreateEditWeighingTicketEntity(
             driverName = "driver1",
             licenseNumber = "AC 4321 DE",
             date = "2024-02-09",
             inboundWeight = 13,
-            outboundWeight = 12
+            outboundWeight = 12,
+            netWeight = 1
         )
 
         coEvery {
@@ -239,12 +252,13 @@ class WeighBridgeRepositoryTest : BaseTest() {
 
             assertEquals(
                 DataResult.Success(
-                    WeighingTicketEntity(
+                    UpdateWeighingTicketEntity(
                         driverName = "driver1",
                         licenseNumber = "AC 4321 DE",
                         date = "2024-02-09",
                         inboundWeight = 13,
-                        outboundWeight = 12
+                        outboundWeight = 12,
+                        netWeight = 1
                     )
                 ),
                 awaitItem()
@@ -264,12 +278,13 @@ class WeighBridgeRepositoryTest : BaseTest() {
     fun `update weighing detail error - return error`() = runTest {
         val mockErrorCode = 500
         val mockErrorMessage = "Response.error()"
-        val mockRequestWeighingTicket = WeighingTicketEntity(
+        val mockRequestWeighingTicket = RequestCreateEditWeighingTicketEntity(
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
             inboundWeight = 13,
-            outboundWeight = 12
+            outboundWeight = 12,
+            netWeight = 1
         )
 
         coEvery {
@@ -286,7 +301,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
             )
 
             assertEquals(
-                DataResult.Error<SetWeighingTicketResponseEntity>(mockErrorMessage, mockErrorCode),
+                DataResult.Error<SetWeighingTicketEntity>(mockErrorMessage, mockErrorCode),
                 awaitItem()
             )
 

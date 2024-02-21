@@ -30,18 +30,22 @@ class WeighingListViewModelTest : BaseTest() {
         /** Mock Data */
         val mockWeighingResultData = listOf(
             WeighingTicketEntity(
+                uId = "-NqxNttkoh63e0IITemA",
                 driverName = "driver1",
                 licenseNumber = "AAA",
                 date = "13 Sep 23",
                 inboundWeight = 13,
-                outboundWeight = 12
+                outboundWeight = 12,
+                netWeight = 1
             ),
             WeighingTicketEntity(
+                uId = "-NqxNttkoh63e0IITemB",
                 driverName = "driver2",
                 licenseNumber = "BBB",
                 date = "20 Jan 23",
                 inboundWeight = 23,
-                outboundWeight = 21
+                outboundWeight = 21,
+                netWeight = 1
             )
         )
 
