@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.databinding.ItemWeighingBinding
 
-class WeighingListAdapter(private val onClick: (WeighingTicketEntity) -> Unit,
-    private val onEditClick: () -> Unit) :
+class WeighingListAdapter(
+    private val onClick: (String) -> Unit,
+    private val onEditClick: (String) -> Unit
+) :
     ListAdapter<WeighingTicketEntity, RecyclerView.ViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -30,10 +32,10 @@ class WeighingListAdapter(private val onClick: (WeighingTicketEntity) -> Unit,
             tvLicenseNum.text = item.licenseNumber
             tvDateTime.text = item.date
             root.setOnClickListener {
-                //onClick.invoke()
+                onClick.invoke(item.uId)
             }
             vEdit.setOnClickListener {
-                onEditClick.invoke()
+                onEditClick.invoke(item.uId)
             }
         }
     }
