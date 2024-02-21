@@ -11,7 +11,9 @@ import com.sawitpro.weightbridge.domain.mapper.SetWeighingDetailMapper
 import com.sawitpro.weightbridge.domain.mapper.UpdateWeighingDetailMapper
 import com.sawitpro.weightbridge.domain.mapper.WeighingListMapper
 import com.sawitpro.weightbridge.domain.repository.core.dataSourceHandling
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 
 class WeighBridgeRepositoryImpl(
     private val api: WeighingApi,
@@ -27,7 +29,7 @@ class WeighBridgeRepositoryImpl(
             mapper = WeighingListMapper(),
             getFromDb = { localData.getWeighingTicketList() },
             saveToDb = { localData.insertWeighingTicket(it) }
-        )
+        ).flowOn(Dispatchers.IO)
 
     override suspend fun setWeighingDetail(request: RequestCreateEditWeighingTicketEntity): Flow<DataResult<SetWeighingTicketEntity>> =
         dataSourceHandling(
@@ -39,5 +41,5 @@ class WeighBridgeRepositoryImpl(
         dataSourceHandling(
             networkCall = { api.updateWeighingList(request) },
             mapper = UpdateWeighingDetailMapper()
-        )
+        ).flowOn(Dispatchers.IO)
 }
