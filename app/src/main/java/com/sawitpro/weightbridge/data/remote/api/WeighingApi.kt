@@ -3,11 +3,11 @@ package com.sawitpro.weightbridge.data.remote.api
 import com.sawitpro.weightbridge.data.model.dto.SetWeighingResponseDto
 import com.sawitpro.weightbridge.data.model.dto.WeighingTicketDto
 import com.sawitpro.weightbridge.data.model.entity.RequestCreateEditWeighingTicketEntity
-import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface WeighingApi {
 
@@ -17,6 +17,9 @@ interface WeighingApi {
     @POST("posts.json")
     suspend fun setWeighingList(request: RequestCreateEditWeighingTicketEntity): Response<SetWeighingResponseDto>
 
-    @PUT("posts.json")
-    suspend fun updateWeighingList(request: RequestCreateEditWeighingTicketEntity): Response<WeighingTicketDto>
+    @PUT("posts/{uId}.json")
+    suspend fun updateWeighingList(
+        @Path("uId") uId: String,
+        request: RequestCreateEditWeighingTicketEntity
+    ): Response<WeighingTicketDto>
 }

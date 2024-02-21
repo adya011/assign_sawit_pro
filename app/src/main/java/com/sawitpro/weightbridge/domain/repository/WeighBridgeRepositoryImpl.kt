@@ -35,11 +35,14 @@ class WeighBridgeRepositoryImpl(
         dataSourceHandling(
             networkCall = { api.setWeighingList(request) },
             mapper = SetWeighingDetailMapper()
-        )
+        ).flowOn(Dispatchers.IO)
 
-    override suspend fun updateWeighingDetail(request: RequestCreateEditWeighingTicketEntity): Flow<DataResult<UpdateWeighingTicketEntity>> =
+    override suspend fun updateWeighingDetail(
+        uId: String,
+        request: RequestCreateEditWeighingTicketEntity
+    ): Flow<DataResult<UpdateWeighingTicketEntity>> =
         dataSourceHandling(
-            networkCall = { api.updateWeighingList(request) },
+            networkCall = { api.updateWeighingList(uId, request) },
             mapper = UpdateWeighingDetailMapper()
         ).flowOn(Dispatchers.IO)
 }
