@@ -221,6 +221,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
 
     @Test
     fun `update weighing detail success - return weighing data`() = runTest {
+        val mockUid = "-NqxNttkoh63e0IITemA"
         val mockRequestWeighingTicket = RequestCreateEditWeighingTicketEntity(
             driverName = "driver1",
             licenseNumber = "AC 4321 DE",
@@ -232,6 +233,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
 
         coEvery {
             weighingApi.updateWeighingList(
+                mockUid,
                 mockRequestWeighingTicket
             )
         } returns Response.success(
@@ -244,7 +246,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
             )
         )
 
-        repo.updateWeighingDetail(mockRequestWeighingTicket).test {
+        repo.updateWeighingDetail(mockUid, mockRequestWeighingTicket).test {
             assertEquals(
                 DataResult.Loading<WeighingTicketEntity>(),
                 awaitItem()
@@ -268,7 +270,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
         }
 
         coVerify {
-            weighingApi.updateWeighingList(mockRequestWeighingTicket)
+            weighingApi.updateWeighingList(mockUid, mockRequestWeighingTicket)
         }
 
         confirmVerified(weighingApi)
@@ -276,6 +278,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
 
     @Test
     fun `update weighing detail error - return error`() = runTest {
+        val mockUid = "-NqxNttkoh63e0IITemA"
         val mockErrorCode = 500
         val mockErrorMessage = "Response.error()"
         val mockRequestWeighingTicket = RequestCreateEditWeighingTicketEntity(
@@ -288,13 +291,13 @@ class WeighBridgeRepositoryTest : BaseTest() {
         )
 
         coEvery {
-            weighingApi.updateWeighingList(mockRequestWeighingTicket)
+            weighingApi.updateWeighingList(mockUid, mockRequestWeighingTicket)
         } returns Response.error(
             mockErrorCode,
             "{\"errorMessage\":\"error\",\"code\":\"400\"}".toResponseBody("application/json".toMediaTypeOrNull())
         )
 
-        repo.updateWeighingDetail(mockRequestWeighingTicket).test {
+        repo.updateWeighingDetail(mockUid, mockRequestWeighingTicket).test {
             assertEquals(
                 DataResult.Loading<WeighingTicketEntity>(),
                 awaitItem()
@@ -309,7 +312,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
         }
 
         coVerify {
-            weighingApi.updateWeighingList(mockRequestWeighingTicket)
+            weighingApi.updateWeighingList(mockUid, mockRequestWeighingTicket)
         }
 
         confirmVerified(weighingApi)
