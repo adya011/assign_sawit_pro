@@ -1,16 +1,26 @@
 package com.sawitpro.weightbridge.di
 
+import androidx.room.Room
 import com.sawitpro.weightbridge.data.core.RetrofitBuilder
+import com.sawitpro.weightbridge.data.local.core.AppDatabase
 import com.sawitpro.weightbridge.data.remote.api.WeighingApi
 import com.sawitpro.weightbridge.domain.repository.WeighBridgeRepositoryImpl
 import com.sawitpro.weightbridge.domain.repository.WeighBridgetRepository
 import com.sawitpro.weightbridge.ui.feature.detail.WeighingCreateEditViewModel
 import com.sawitpro.weightbridge.ui.feature.detail.WeighingDetailViewModel
 import com.sawitpro.weightbridge.ui.feature.list.WeighingListViewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 object Modules {
+
+    private val persistenceModule = module {
+        single {
+            Room.databaseBuilder(androidApplication(), AppDatabase::class.java, "appdb")
+                .fallbackToDestructiveMigration().build()
+        }
+    }
 
     private val networkModules = module {
         single<WeighingApi> {
@@ -33,6 +43,7 @@ object Modules {
     }
 
     fun getAppComponents() = listOf(
+        persistenceModule,
         networkModules,
         repositoryModules,
         viewModelModules,
