@@ -6,7 +6,8 @@ import com.sawitpro.weightbridge.data.local.core.AppDatabase
 import com.sawitpro.weightbridge.data.remote.api.WeighingApi
 import com.sawitpro.weightbridge.domain.repository.WeighBridgeRepositoryImpl
 import com.sawitpro.weightbridge.domain.repository.WeighBridgetRepository
-import com.sawitpro.weightbridge.ui.feature.detail.WeighingCreateEditViewModel
+import com.sawitpro.weightbridge.ui.feature.detail.WeighingCreateViewModel
+import com.sawitpro.weightbridge.ui.feature.detail.WeighingEditViewModel
 import com.sawitpro.weightbridge.ui.feature.detail.WeighingDetailViewModel
 import com.sawitpro.weightbridge.ui.feature.list.WeighingListViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -34,8 +35,9 @@ object Modules {
 
     private val viewModelModules = module {
         viewModel { WeighingListViewModel(get()) }
-        viewModel { WeighingCreateEditViewModel(get()) }
+        viewModel { WeighingEditViewModel(get()) }
         viewModel { WeighingDetailViewModel(get()) }
+        viewModel { WeighingCreateViewModel(get()) }
     }
 
     private val daoModules = module {

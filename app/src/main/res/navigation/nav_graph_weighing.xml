@@ -7,21 +7,45 @@
         android:id="@+id/fragment_weighing_list"
         android:name="com.sawitpro.weightbridge.ui.feature.list.WeighingListFragment">
         <action
-            android:id="@+id/action_fragment_weighing_list_to_fragment_weighing_detail"
-            app:destination="@id/fragment_weighing_detail"></action>
+            android:id="@+id/action_open_detail"
+            app:destination="@id/fragment_weighing_detail">
+            <argument
+                android:name="detail_id"
+                app:argType="string" />
+        </action>
         <action
-            android:id="@+id/action_open_create_edit"
-            app:destination="@id/fragment_weighing_create_edit" />
+            android:id="@+id/action_open_edit"
+            app:destination="@id/fragment_weighing_edit">
+            <argument
+                android:name="detail_id"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_open_create"
+            app:destination="@id/fragment_weighing_create" />
     </fragment>
 
     <fragment
         android:id="@+id/fragment_weighing_detail"
-        android:name="com.sawitpro.weightbridge.ui.feature.detail.WeighingDetailFragment"></fragment>
+        android:name="com.sawitpro.weightbridge.ui.feature.detail.WeighingDetailFragment">
+        <argument
+            android:name="detail_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_open_edit"
+            app:destination="@id/fragment_weighing_edit" />
+    </fragment>
 
     <fragment
-        android:id="@+id/fragment_weighing_create_edit"
-        android:name="com.sawitpro.weightbridge.ui.feature.detail.WeighingCreateEditFragment">
-
+        android:id="@+id/fragment_weighing_edit"
+        android:name="com.sawitpro.weightbridge.ui.feature.detail.WeighingEditFragment">
+        <argument
+            android:name="detail_id"
+            app:argType="string" />
     </fragment>
+
+    <fragment
+        android:id="@+id/fragment_weighing_create"
+        android:name="com.sawitpro.weightbridge.ui.feature.detail.WeighingCreateFragment" />
 
 </navigation>

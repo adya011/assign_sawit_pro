@@ -17,6 +17,7 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <TextView
+                android:id="@+id/tv_toolbar_title"
                 style="@style/SawitPro.PageTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,6 +62,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tv_label_id"
                     style="@style/SawitPro.Label.Detail.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,6 +72,7 @@
                     android:text="Ticket Code" />
 
                 <TextView
+                    android:id="@+id/tv_value_id"
                     style="@style/SawitPro.Label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,10 +89,10 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_profile">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_driver_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Driver Name"
-                        android:text="Asep" />
+                        android:hint="Driver Name" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,6 +104,7 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_profile">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_license_num"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="License Num" />
@@ -115,6 +119,7 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_profile">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Date" />
@@ -129,6 +134,7 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_profile">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_inbound_weight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Inbound Weight" />
@@ -143,9 +149,26 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_profile">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_outbound_weight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Outbound Weight" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="24dp"
+                    android:enabled="false"
+                    app:layout_constraintTop_toBottomOf="@id/iv_profile">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_net_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Net Weight" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -158,12 +181,13 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_net" />
 
                 <Button
+                    android:id="@+id/btn_apply"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="24dp"
                     android:backgroundTint="@color/green_sawit_pro"
-                    android:text="Edit Ticket"
+                    android:text="Apply"
                     app:layout_constraintTop_toBottomOf="@id/v_div" />
 
             </LinearLayout>

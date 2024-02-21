@@ -1,17 +1,21 @@
 package com.sawitpro.weightbridge.ui.feature.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.sawitpro.weightbridge.R
+import androidx.navigation.fragment.findNavController
 import com.sawitpro.weightbridge.databinding.FragmentWeighingCreateEditBinding
+import com.sawitpro.weightbridge.ui.feature.base.BaseFragment
 
-class WeighingCreateEditFragment : Fragment() {
+abstract class WeighingCreateEditFragment : BaseFragment() {
 
     private var _binding: FragmentWeighingCreateEditBinding? = null
-    private val binding get() = _binding!!
+    protected val binding get() = _binding!!
+
+    protected var netWeight: Int = 0
+
+    abstract fun getToolbarTitle(): String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +28,11 @@ class WeighingCreateEditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupToolbar()
+
+        // TODO: Make listener for net weight
+
+        // TODO: Make date textbox
     }
 
     override fun onDestroy() {
@@ -31,5 +40,10 @@ class WeighingCreateEditFragment : Fragment() {
         _binding = null
     }
 
-
+    private fun setupToolbar() {
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+        binding.tvToolbarTitle.text = getToolbarTitle()
+    }
 }
