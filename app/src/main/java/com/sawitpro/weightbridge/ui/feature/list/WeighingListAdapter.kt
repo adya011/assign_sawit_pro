@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.sawitpro.weightbridge.data.model.entity.TruckDataEntity
+import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.databinding.ItemWeighingBinding
 
-class WeighingListAdapter(val onClick: (String) -> Unit) :
-    ListAdapter<TruckDataEntity, RecyclerView.ViewHolder>(COMPARATOR) {
+class WeighingListAdapter(private val onClick: (WeighingTicketEntity) -> Unit,
+    private val onEditClick: () -> Unit) :
+    ListAdapter<WeighingTicketEntity, RecyclerView.ViewHolder>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding =
@@ -21,27 +22,33 @@ class WeighingListAdapter(val onClick: (String) -> Unit) :
         (holder as WeighingViewHolder).bind(getItem(position))
     }
 
-    class WeighingViewHolder(
+    inner class WeighingViewHolder(
         private val binding: ItemWeighingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: TruckDataEntity) = with(binding) {
+        fun bind(item: WeighingTicketEntity) = with(binding) {
             tvDriverName.text = item.driverName
             tvLicenseNum.text = item.licenseNumber
             tvDateTime.text = item.date
+            root.setOnClickListener {
+                //onClick.invoke()
+            }
+            vEdit.setOnClickListener {
+                onEditClick.invoke()
+            }
         }
     }
 
     companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<TruckDataEntity>() {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<WeighingTicketEntity>() {
             override fun areItemsTheSame(
-                oldItem: TruckDataEntity,
-                newItem: TruckDataEntity
+                oldItem: WeighingTicketEntity,
+                newItem: WeighingTicketEntity
             ): Boolean =
-                oldItem.id == newItem.id && oldItem.driverName == newItem.driverName
+                oldItem.uId == newItem.uId && oldItem.driverName == newItem.driverName
 
             override fun areContentsTheSame(
-                oldItem: TruckDataEntity,
-                newItem: TruckDataEntity
+                oldItem: WeighingTicketEntity,
+                newItem: WeighingTicketEntity
             ): Boolean = oldItem == newItem
         }
     }

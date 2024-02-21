@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.sawitpro.weightbridge.data.model.entity.TruckDataEntity
+import androidx.navigation.fragment.findNavController
 import com.sawitpro.weightbridge.databinding.FragmentWeighingListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,8 +40,19 @@ class WeighingListFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        weighingAdapter = WeighingListAdapter {  }
+        weighingAdapter = WeighingListAdapter(
+            onClick = {},
+            onEditClick = {
+                navigateToEdit()
+            }
+        )
         binding.rvWeighing.adapter = weighingAdapter
+    }
+
+    private fun navigateToEdit() {
+        findNavController().navigate(
+            WeighingListFragmentDirections.actionOpenCreateEdit()
+        )
     }
 
     private fun setupObserver() {
