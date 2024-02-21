@@ -17,6 +17,11 @@ object AndroidLibraries {
     const val kotlinCoroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.moshiConverter}"
 
+    // Database
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+
     // Test
     const val coroutineTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     const val archCoreTest = "androidx.arch.core:core-testing:${Versions.archCoreTest}"
@@ -39,4 +44,5 @@ object Versions {
     const val turbine = "0.12.1"
     const val okHttp = "5.0.0-alpha.11"
     const val moshiConverter = "2.0.0"
+    const val room = "2.4.0"
 }
