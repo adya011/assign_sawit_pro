@@ -4,6 +4,7 @@ import com.sawitpro.weightbridge.data.model.dto.SetWeighingResponseDto
 import com.sawitpro.weightbridge.data.model.dto.WeighingTicketDto
 import com.sawitpro.weightbridge.data.model.entity.RequestCreateEditWeighingTicketEntity
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -15,11 +16,13 @@ interface WeighingApi {
     suspend fun getWeighingList(): Response<Map<String, WeighingTicketDto>>
 
     @POST("posts.json")
-    suspend fun setWeighingList(request: RequestCreateEditWeighingTicketEntity): Response<SetWeighingResponseDto>
+    suspend fun setWeighingList(
+        @Body request: RequestCreateEditWeighingTicketEntity
+    ): Response<SetWeighingResponseDto>
 
     @PUT("posts/{uId}.json")
     suspend fun updateWeighingList(
         @Path("uId") uId: String,
-        request: RequestCreateEditWeighingTicketEntity
+        @Body request: RequestCreateEditWeighingTicketEntity
     ): Response<WeighingTicketDto>
 }
