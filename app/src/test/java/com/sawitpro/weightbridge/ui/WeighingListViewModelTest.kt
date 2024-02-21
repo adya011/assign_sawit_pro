@@ -3,7 +3,7 @@ package com.sawitpro.weightbridge.ui
 import androidx.lifecycle.Observer
 import com.sawitpro.weightbridge.base.BaseTest
 import com.sawitpro.weightbridge.data.core.DataResult
-import com.sawitpro.weightbridge.data.model.entity.TruckDataEntity
+import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.ui.feature.list.WeighingListViewModel
 import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_ERROR
 import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_LOADING
@@ -29,21 +29,23 @@ class WeighingListViewModelTest : BaseTest() {
     fun `fetch weighing list - success data loaded from API`() {
         /** Mock Data */
         val mockWeighingResultData = listOf(
-            TruckDataEntity(
-                id = "0",
+            WeighingTicketEntity(
                 driverName = "driver1",
                 licenseNumber = "AAA",
-                date = "13 Sep 23"
+                date = "13 Sep 23",
+                inboundWeight = 13,
+                outboundWeight = 12
             ),
-            TruckDataEntity(
-                id = "1",
+            WeighingTicketEntity(
                 driverName = "driver2",
                 licenseNumber = "BBB",
-                date = "20 Jan 23"
+                date = "20 Jan 23",
+                inboundWeight = 23,
+                outboundWeight = 21
             )
         )
 
-        val weighingListObserver = mockk<Observer<List<TruckDataEntity>?>>(relaxed = true)
+        val weighingListObserver = mockk<Observer<List<WeighingTicketEntity>?>>(relaxed = true)
         viewModel.weighingListLiveData.observeForever(weighingListObserver)
 
         val flowResult = flow { emit(DataResult.Success(mockWeighingResultData)) }
@@ -64,9 +66,9 @@ class WeighingListViewModelTest : BaseTest() {
     @Test
     fun `fetch weighing list - success empty data loaded from API`() {
         /** Mock Data */
-        val mockWeighingResultData = emptyList<TruckDataEntity>()
+        val mockWeighingResultData = emptyList<WeighingTicketEntity>()
 
-        val weighingListObserver = mockk<Observer<List<TruckDataEntity>?>>(relaxed = true)
+        val weighingListObserver = mockk<Observer<List<WeighingTicketEntity>?>>(relaxed = true)
         viewModel.weighingListLiveData.observeForever(weighingListObserver)
 
         val flowResult = flow { emit(DataResult.Success(mockWeighingResultData)) }
@@ -91,13 +93,13 @@ class WeighingListViewModelTest : BaseTest() {
         val mockErrorCode = 500
         val mockDisplayState = CHILD_INDEX_ERROR
 
-        val weighingListObserver = mockk<Observer<List<TruckDataEntity>?>>(relaxed = true)
-        viewModel.weighingListLiveData.observeForever(weighingListObserver)
+        val errorObserver = mockk<Observer<String?>>(relaxed = true)
+        viewModel.errorMessageLiveData.observeForever(errorObserver)
 
         val displayStateObserver = mockk<Observer<Int?>>(relaxed = true)
         viewModel.displayStateLiveData.observeForever(displayStateObserver)
 
-        val flowResult = flow { emit(DataResult.Error<List<TruckDataEntity>>(mockErrorMessage, mockErrorCode)) }
+        val flowResult = flow { emit(DataResult.Error<List<WeighingTicketEntity>>(mockErrorMessage, mockErrorCode)) }
         coEvery { weighingRepo.getWeighingList() } returns flowResult
 
         /** Test start */
@@ -106,9 +108,11 @@ class WeighingListViewModelTest : BaseTest() {
         /** Results */
         verify {
             displayStateObserver.onChanged(viewModel.displayStateLiveData.value)
+            errorObserver.onChanged(viewModel.errorMessageLiveData.value)
         }
 
         Assert.assertEquals(mockDisplayState, CHILD_INDEX_ERROR)
+        Assert.assertEquals(mockErrorMessage, "something wrong")
     }
 
     @Test
@@ -119,7 +123,7 @@ class WeighingListViewModelTest : BaseTest() {
         val displayStateObserver = mockk<Observer<Int?>>(relaxed = true)
         viewModel.displayStateLiveData.observeForever(displayStateObserver)
 
-        val flowResult = flow { emit(DataResult.Loading<List<TruckDataEntity>>()) }
+        val flowResult = flow { emit(DataResult.Loading<List<WeighingTicketEntity>>()) }
         coEvery { weighingRepo.getWeighingList() } returns flowResult
 
         /** Test start */
