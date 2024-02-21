@@ -57,9 +57,9 @@ class WeighingDetailFragment : BaseFragment() {
         tvId.text = data.uId
         tvDriverName.text = data.driverName
         tvLicenseNum.text = data.licenseNumber
-        tvInbound.text = "Inbound: ${data.inboundWeight}"
-        tvOutbound.text = "Outbound: ${data.outboundWeight}"
-        tvNet.text = "Net: ${data.netWeight}"
+        tvInbound.text = "Inbound: ${data.inboundWeight} kg"
+        tvOutbound.text = "Outbound: ${data.outboundWeight} kg"
+        tvNet.text = "Net: ${data.netWeight} kg"
     }
 
     private fun setupObserver() {
