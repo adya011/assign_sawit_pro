@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:elevation="8dp"
+        app:cardElevation="4dp"
         app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,7 +50,7 @@
                 android:id="@+id/v_div"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:background="#DDDEE6"
                 app:layout_constraintTop_toBottomOf="@id/tv_date_time" />
 
@@ -70,7 +70,7 @@
                 android:id="@+id/iv_edit"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:src="@drawable/ic_edit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/v_div" />
@@ -78,7 +78,7 @@
             <View
                 android:id="@+id/v_edit"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_edit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_edit" />
