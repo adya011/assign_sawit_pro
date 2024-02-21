@@ -17,6 +17,10 @@
         <item name="android:textColor">@color/textPrimary</item>
     </style>
 
+    <style name="SawitPro.PageTitle.Detail" parent="SawitPro.PageTitle">
+        <item name="android:textSize">22sp</item>
+    </style>
+
     <style name="SawitPro.SubTitle" parent="SawitPro.Bold">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
@@ -24,10 +28,21 @@
         <item name="android:textColor">@color/textPrimary</item>
     </style>
 
+    <style name="SawitPro.SubTitle.Detail" parent="SawitPro.SubTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textSecondary</item>
+    </style>
+
     <style name="SawitPro.Label" parent="SawitPro.Bold">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/textSecondary</item>
         <item name="android:lineSpacingMultiplier">1.15</item>
-        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+    <style name="SawitPro.Label.Detail.Small" parent="SawitPro.Label">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/textSecondary</item>
     </style>
 </resources>
