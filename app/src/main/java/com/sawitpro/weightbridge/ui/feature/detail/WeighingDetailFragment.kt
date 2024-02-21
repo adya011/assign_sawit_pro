@@ -6,9 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.databinding.FragmentWeighingDetailBinding
+import com.sawitpro.weightbridge.ui.feature.base.BaseFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WeighingDetailFragment : Fragment() {
+class WeighingDetailFragment : BaseFragment() {
+
+    private val viewModel by viewModel<WeighingDetailViewModel>()
+
+    private val args by navArgs<WeighingDetailFragmentArgs>()
 
     private var _binding: FragmentWeighingDetailBinding? = null
     private val binding get() = _binding!!
@@ -24,8 +32,9 @@ class WeighingDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupToolbar()
+        viewModel.getDetail(args.detailId)
         setupView()
+        setupObserver()
     }
 
     override fun onDestroy() {
@@ -33,25 +42,29 @@ class WeighingDetailFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupToolbar() {
+    private fun setupView() {
         binding.ivBack.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.btnEdit.setOnClickListener {
+            findNavController().navigate(
+                WeighingDetailFragmentDirections.actionOpenEdit(args.detailId)
+            )
+        }
     }
 
-    private fun setupView() = with(binding) {
-        /*val id = args.detailId
-        val driverName = args.driverName
-        val licenseNum = args.licenseNum
-        val inboundWeight = args.inboundWeight
-        val outboundWeight = args.outboundWeight
-        val netWeight = args.netWeight
+    private fun setupViews(data: WeighingTicketEntity) = with(binding) {
+        tvId.text = data.uId
+        tvDriverName.text = data.driverName
+        tvLicenseNum.text = data.licenseNumber
+        tvInbound.text = "Inbound: ${data.inboundWeight}"
+        tvOutbound.text = "Outbound: ${data.outboundWeight}"
+        tvNet.text = "Net: ${data.netWeight}"
+    }
 
-        tvId.text = id
-        tvDriverName.text = driverName
-        tvLicenseNum.text = licenseNum
-        tvInbound.text = "Inbound: $inboundWeight"
-        tvOutbound.text = "Outbound: $outboundWeight"
-        tvNet.text = "Net: $netWeight"*/
+    private fun setupObserver() {
+        viewModel.ticketDetailLiveData.observe(viewLifecycleOwner) {
+            setupViews(it)
+        }
     }
 }
