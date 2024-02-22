@@ -48,7 +48,6 @@ class WeighingListFragment : BaseFragment() {
         btnAddTicket.setOnClickListener {
             navigateToCreate()
         }
-        // TODO: date not formatted
     }
 
     private fun setupAdapter() {
