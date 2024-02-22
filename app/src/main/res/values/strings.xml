@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">WeightBridgeSawitPro</string>
     <string name="get_date_offline">Get Data Offline</string>
+    <string name="create_ticket">Create Ticket</string>
+    <string name="apply">Apply</string>
+    <string name="create_edit_must_be_online">Update or create ticket must be online</string>
 </resources>

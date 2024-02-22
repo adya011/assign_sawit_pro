@@ -77,7 +77,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="12dp"
                             android:backgroundTint="@color/green_sawit_pro"
-                            android:text="Create Ticket"
+                            android:text="@string/create_ticket"
                             app:layout_constraintBottom_toBottomOf="parent" />
 
                     </LinearLayout>
