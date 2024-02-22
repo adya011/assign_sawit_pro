@@ -26,7 +26,7 @@ class WeighingCreateViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `set weighing detail - success data requested to API`() {
+    fun `set weighing detail - success data retrieved`() {
         /** Mock Data */
         val mockSetWeighingResponse = SetWeighingTicketEntity(
             name = "-Nr3o-MR0h_QQssGWA4X"
@@ -57,7 +57,7 @@ class WeighingCreateViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `set weighing detail - error from API`() {
+    fun `set weighing detail - error`() {
         /** Mock Data */
         val mockErrorMessage = "something wrong"
         val mockErrorCode = 500

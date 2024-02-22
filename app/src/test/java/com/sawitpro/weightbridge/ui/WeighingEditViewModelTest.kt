@@ -26,7 +26,7 @@ class WeighingEditViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `update weighing detail - success data requested to API`() {
+    fun `update weighing detail - success data retrieved`() {
         /** Mock Data */
         val mockUid = "-NqxNttkoh63e0IITemA"
         val mockUpdateWeighingResponse = UpdateWeighingTicketEntity(
@@ -71,7 +71,7 @@ class WeighingEditViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `update weighing detail - error from API`() {
+    fun `update weighing detail - error`() {
         /** Mock Data */
         val mockUid = "-NqxNttkoh63e0IITemA"
         val mockErrorMessage = "something wrong"

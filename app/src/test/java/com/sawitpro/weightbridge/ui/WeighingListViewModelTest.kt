@@ -26,7 +26,7 @@ class WeighingListViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `fetch weighing list - success data loaded from API`() {
+    fun `fetch weighing list - success data retrieved`() {
         /** Mock Data */
         val mockWeighingResultData = listOf(
             WeighingTicketEntity(
@@ -68,7 +68,7 @@ class WeighingListViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `fetch weighing list - success empty data loaded from API`() {
+    fun `fetch weighing list - success empty data retrieved`() {
         /** Mock Data */
         val mockWeighingResultData = emptyList<WeighingTicketEntity>()
 
@@ -91,7 +91,7 @@ class WeighingListViewModelTest : BaseTest() {
     }
 
     @Test
-    fun `fetch weighing list - error form API`() {
+    fun `fetch weighing list - error`() {
         /** Mock Data */
         val mockErrorMessage = "something wrong"
         val mockErrorCode = 500
