@@ -36,8 +36,7 @@ class WeighingCreateViewModelTest : BaseTest() {
             licenseNumber = "AAA",
             date = "13 Sep 23",
             inboundWeight = 13.0,
-            outboundWeight = 12.0,
-            netWeight = 1.0
+            outboundWeight = 12.0
         )
 
         val setWeighingObserver = mockk<Observer<SetWeighingTicketEntity?>>(relaxed = true)
@@ -68,8 +67,7 @@ class WeighingCreateViewModelTest : BaseTest() {
             licenseNumber = "AAA",
             date = "13 Sep 23",
             inboundWeight = 13.0,
-            outboundWeight = 12.0,
-            netWeight = 1.0
+            outboundWeight = 12.0
         )
 
         val errorObserver = mockk<Observer<String?>>(relaxed = true)
@@ -103,8 +101,7 @@ class WeighingCreateViewModelTest : BaseTest() {
             licenseNumber = "AAA",
             date = "13 Sep 23",
             inboundWeight = 13.0,
-            outboundWeight = 12.0,
-            netWeight = 1.0
+            outboundWeight = 12.0
         )
 
         val loadingObserver = mockk<Observer<Boolean?>>(relaxed = true)

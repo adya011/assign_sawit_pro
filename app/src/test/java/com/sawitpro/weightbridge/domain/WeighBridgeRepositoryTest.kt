@@ -139,8 +139,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
             licenseNumber = "AAA",
             date = "13 Sep 23",
             inboundWeight = 13.0,
-            outboundWeight = 12.0,
-            netWeight = 1.0
+            outboundWeight = 12.0
         )
 
         coEvery {
@@ -187,8 +186,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
             licenseNumber = "AAA",
             date = "13 Sep 23",
             inboundWeight = 13.0,
-            outboundWeight = 12.0,
-            netWeight = 1.0
+            outboundWeight = 12.0
         )
 
         coEvery {
@@ -227,8 +225,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
             licenseNumber = "AC 4321 DE",
             date = "2024-02-09",
             inboundWeight = 13.0,
-            outboundWeight = 12.0,
-            netWeight = 1.0
+            outboundWeight = 12.0
         )
 
         coEvery {
@@ -286,8 +283,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
             licenseNumber = "AAA",
             date = "13 Sep 23",
             inboundWeight = 13.0,
-            outboundWeight = 12.0,
-            netWeight = 1.0
+            outboundWeight = 12.0
         )
 
         coEvery {
