@@ -29,9 +29,7 @@ class WeighingCreateFragment : AbstractWeighingCreateEditFragment() {
                 licenseNumber = etLicenseNum.text.toString(),
                 date = getCurrentDate(),
                 inboundWeight = etInboundWeight.text.toDouble(),
-                outboundWeight = etOutboundWeight.text.toDouble(),
-                netWeight =
-                etInboundWeight.text.toDouble() - etOutboundWeight.text.toDouble()
+                outboundWeight = etOutboundWeight.text.toDouble()
             )
         )
     }

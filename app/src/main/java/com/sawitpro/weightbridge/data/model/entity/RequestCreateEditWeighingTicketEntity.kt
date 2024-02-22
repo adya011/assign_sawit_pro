@@ -16,8 +16,5 @@ data class RequestCreateEditWeighingTicketEntity(
     val inboundWeight: Double,
 
     @Json(name = "outbound_weight")
-    val outboundWeight: Double,
-
-    @Json(name = "net_weight")
-    val netWeight: Double
+    val outboundWeight: Double
 )

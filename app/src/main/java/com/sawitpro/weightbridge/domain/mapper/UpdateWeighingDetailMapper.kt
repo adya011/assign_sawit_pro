@@ -3,6 +3,7 @@ package com.sawitpro.weightbridge.domain.mapper
 import com.sawitpro.weightbridge.data.model.dto.WeighingTicketDto
 import com.sawitpro.weightbridge.data.model.entity.UpdateWeighingTicketEntity
 import com.sawitpro.weightbridge.domain.repository.core.DataMapper
+import com.sawitpro.weightbridge.util.format
 import com.sawitpro.weightbridge.util.orZero
 
 class UpdateWeighingDetailMapper : DataMapper<WeighingTicketDto, UpdateWeighingTicketEntity> {
@@ -13,6 +14,6 @@ class UpdateWeighingDetailMapper : DataMapper<WeighingTicketDto, UpdateWeighingT
             licenseNumber = dataModel?.licenseNumber.orEmpty(),
             inboundWeight = dataModel?.inboundWeight.orZero(),
             outboundWeight = dataModel?.outboundWeight.orZero(),
-            netWeight = dataModel?.inboundWeight.orZero() - dataModel?.outboundWeight.orZero()
+            netWeight = (dataModel?.inboundWeight.orZero() - dataModel?.outboundWeight.orZero()).format()
         )
 }
