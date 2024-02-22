@@ -15,6 +15,15 @@
             android:gravity="center_horizontal"
             android:textSize="18sp"
             tools:text="This is error message " />
+
+        <Button
+            android:id="@+id/btn_get_offline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/green_sawit_pro"
+            android:text="@string/get_date_offline" />
+
     </LinearLayout>
 
 </layout>

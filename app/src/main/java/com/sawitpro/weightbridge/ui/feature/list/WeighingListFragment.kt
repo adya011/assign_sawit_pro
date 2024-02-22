@@ -48,6 +48,9 @@ class WeighingListFragment : BaseFragment() {
         btnAddTicket.setOnClickListener {
             navigateToCreate()
         }
+        layoutWarning.btnGetOffline.setOnClickListener {
+            viewModel.fetchWeighingList()
+        }
     }
 
     private fun setupAdapter() {
@@ -87,10 +90,12 @@ class WeighingListFragment : BaseFragment() {
         }
 
         viewModel.displayStateLiveData.observe(viewLifecycleOwner) {
+            binding.srlRefresh.isRefreshing = false
             binding.vfMain.displayedChild = it
         }
 
         viewModel.warningMessageLiveData.observe(viewLifecycleOwner) {
+            binding.srlRefresh.isRefreshing = false
             binding.layoutWarning.tvWarningMessage.text = it
         }
 
