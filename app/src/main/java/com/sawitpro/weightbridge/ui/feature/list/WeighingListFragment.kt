@@ -95,4 +95,10 @@ class WeighingListFragment : BaseFragment() {
             if (isUpdated) viewModel.fetchWeighingList(true)
         }
     }
+
+    companion object {
+        const val CHILD_INDEX_SUCCESS = 0
+        const val CHILD_INDEX_ERROR = 1
+        const val CHILD_INDEX_LOADING = 2
+    }
 }
