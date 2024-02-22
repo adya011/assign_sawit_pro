@@ -9,12 +9,12 @@ import com.sawitpro.weightbridge.data.model.entity.RequestCreateEditWeighingTick
 import com.sawitpro.weightbridge.data.model.entity.UpdateWeighingTicketEntity
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.domain.repository.WeighBridgetRepository
-import com.sawitpro.weightbridge.util.Constant
-import kotlinx.coroutines.Dispatchers
+import com.sawitpro.weightbridge.domain.repository.core.AppDispatchers
 import kotlinx.coroutines.launch
 
 class WeighingEditViewModel(
-    private val repository: WeighBridgetRepository
+    private val repository: WeighBridgetRepository,
+    private val appDispatchers: AppDispatchers
 ) : ViewModel() {
 
     private val _updateWeighingDetailLiveData: MutableLiveData<UpdateWeighingTicketEntity?> =
@@ -31,7 +31,7 @@ class WeighingEditViewModel(
     val errorMessageLiveData: LiveData<String> get() = _errorMessageLiveData
 
     fun getDetail(uId: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(appDispatchers.io) {
             _ticketDetailLiveData.postValue(repository.getWeighingDetail(uId))
         }
     }

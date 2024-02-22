@@ -10,14 +10,15 @@ import com.sawitpro.weightbridge.data.remote.api.WeighingApi
 import com.sawitpro.weightbridge.domain.mapper.SetWeighingDetailMapper
 import com.sawitpro.weightbridge.domain.mapper.UpdateWeighingDetailMapper
 import com.sawitpro.weightbridge.domain.mapper.WeighingListMapper
+import com.sawitpro.weightbridge.domain.repository.core.AppDispatchers
 import com.sawitpro.weightbridge.domain.repository.core.dataSourceHandling
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
 class WeighBridgeRepositoryImpl(
     private val api: WeighingApi,
-    private val localData: WeighingTicketDao
+    private val localData: WeighingTicketDao,
+    private val appDispatchers: AppDispatchers
 ) : WeighBridgetRepository {
 
     override suspend fun getWeighingDetail(uId: String): WeighingTicketEntity? =
@@ -30,14 +31,14 @@ class WeighBridgeRepositoryImpl(
             getFromDb = { localData.getWeighingTicketList() },
             saveToDb = { localData.insertWeighingTicket(it) },
             isGetFromApi = isRefresh
-        ).flowOn(Dispatchers.IO)
+        ).flowOn(appDispatchers.io)
 
 
     override suspend fun setWeighingDetail(request: RequestCreateEditWeighingTicketEntity): Flow<DataResult<SetWeighingTicketEntity>> =
         dataSourceHandling(
             networkCall = { api.setWeighingList(request) },
             mapper = SetWeighingDetailMapper()
-        ).flowOn(Dispatchers.IO)
+        ).flowOn(appDispatchers.io)
 
     override suspend fun updateWeighingDetail(
         uId: String,
@@ -46,5 +47,5 @@ class WeighBridgeRepositoryImpl(
         dataSourceHandling(
             networkCall = { api.updateWeighingList(uId, request) },
             mapper = UpdateWeighingDetailMapper()
-        ).flowOn(Dispatchers.IO)
+        ).flowOn(appDispatchers.io)
 }

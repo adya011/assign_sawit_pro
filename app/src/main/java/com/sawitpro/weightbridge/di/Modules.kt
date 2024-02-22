@@ -6,10 +6,12 @@ import com.sawitpro.weightbridge.data.local.core.AppDatabase
 import com.sawitpro.weightbridge.data.remote.api.WeighingApi
 import com.sawitpro.weightbridge.domain.repository.WeighBridgeRepositoryImpl
 import com.sawitpro.weightbridge.domain.repository.WeighBridgetRepository
+import com.sawitpro.weightbridge.domain.repository.core.AppDispatchers
 import com.sawitpro.weightbridge.ui.feature.detail.WeighingCreateViewModel
 import com.sawitpro.weightbridge.ui.feature.detail.WeighingEditViewModel
 import com.sawitpro.weightbridge.ui.feature.detail.WeighingDetailViewModel
 import com.sawitpro.weightbridge.ui.feature.list.WeighingListViewModel
+import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -21,6 +23,7 @@ object Modules {
             Room.databaseBuilder(androidApplication(), AppDatabase::class.java, "appdb")
                 .fallbackToDestructiveMigration().build()
         }
+        factory { AppDispatchers(Dispatchers.Main, Dispatchers.IO, Dispatchers.Default) }
     }
 
     private val networkModules = module {
@@ -30,13 +33,13 @@ object Modules {
     }
 
     private val repositoryModules = module {
-        single<WeighBridgetRepository> { WeighBridgeRepositoryImpl(get(), get()) }
+        single<WeighBridgetRepository> { WeighBridgeRepositoryImpl(get(), get(), get()) }
     }
 
     private val viewModelModules = module {
         viewModel { WeighingListViewModel(get()) }
-        viewModel { WeighingEditViewModel(get()) }
-        viewModel { WeighingDetailViewModel(get()) }
+        viewModel { WeighingEditViewModel(get(), get()) }
+        viewModel { WeighingDetailViewModel(get(), get()) }
         viewModel { WeighingCreateViewModel(get()) }
     }
 
