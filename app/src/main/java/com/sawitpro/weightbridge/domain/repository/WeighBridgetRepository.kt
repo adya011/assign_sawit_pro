@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface WeighBridgetRepository {
 
-    suspend fun getWeighingDetail(uId: String): WeighingTicketEntity
+    suspend fun getWeighingDetail(uId: String): WeighingTicketEntity?
 
     suspend fun getWeighingList(isRefresh: Boolean): Flow<DataResult<List<WeighingTicketEntity>>>
 

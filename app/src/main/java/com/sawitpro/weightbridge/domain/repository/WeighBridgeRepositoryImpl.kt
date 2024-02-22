@@ -20,7 +20,7 @@ class WeighBridgeRepositoryImpl(
     private val localData: WeighingTicketDao
 ) : WeighBridgetRepository {
 
-    override suspend fun getWeighingDetail(uId: String): WeighingTicketEntity =
+    override suspend fun getWeighingDetail(uId: String): WeighingTicketEntity? =
         localData.getWeighingTicketDetail(uId)
 
     override suspend fun getWeighingList(isRefresh: Boolean): Flow<DataResult<List<WeighingTicketEntity>>> =
