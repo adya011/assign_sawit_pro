@@ -46,8 +46,8 @@ class WeighingListViewModel(
                             _warningMessageLiveData.value = DATA_IS_EMPTY
                         } else {
                             _displayStateLiveData.value = CHILD_INDEX_SUCCESS
-                            _weighingListLiveData.value = data
                         }
+                        _weighingListLiveData.value = data
                     }
 
                     is DataResult.Error -> {
