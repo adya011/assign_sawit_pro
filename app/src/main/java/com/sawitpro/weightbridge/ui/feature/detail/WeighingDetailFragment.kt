@@ -68,5 +68,9 @@ class WeighingDetailFragment : BaseFragment() {
         viewModel.ticketDetailLiveData.observe(viewLifecycleOwner) {
             setupViews(it)
         }
+
+        viewModel.errorMessageLiveData.observe(viewLifecycleOwner) {
+            showToast(it)
+        }
     }
 }

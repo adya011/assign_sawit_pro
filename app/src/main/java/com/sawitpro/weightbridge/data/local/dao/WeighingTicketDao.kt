@@ -15,5 +15,5 @@ interface WeighingTicketDao {
     fun insertWeighingTicket(weighingTicket: List<WeighingTicketEntity>)
 
     @Query("SELECT * FROM weighing_ticket WHERE uId=:uId")
-    fun getWeighingTicketDetail(uId: String): WeighingTicketEntity
+    fun getWeighingTicketDetail(uId: String): WeighingTicketEntity?
 }
