@@ -47,11 +47,6 @@ class WeighingDetailFragment : BaseFragment() {
         ivBack.setOnClickListener {
             findNavController().navigateUp()
         }
-        btnEdit.setOnClickListener {
-            findNavController().navigate(
-                WeighingDetailFragmentDirections.actionOpenEdit(args.detailId)
-            )
-        }
     }
 
     private fun setupViews(data: WeighingTicketEntity) = with(binding) {
