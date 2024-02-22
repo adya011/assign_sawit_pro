@@ -5,7 +5,7 @@ import com.sawitpro.weightbridge.base.BaseTest
 import com.sawitpro.weightbridge.data.core.DataResult
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.ui.feature.list.WeighingListViewModel
-import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_ERROR
+import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_WARNING
 import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_LOADING
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -95,10 +95,10 @@ class WeighingListViewModelTest : BaseTest() {
         /** Mock Data */
         val mockErrorMessage = "something wrong"
         val mockErrorCode = 500
-        val mockDisplayState = CHILD_INDEX_ERROR
+        val mockDisplayState = CHILD_INDEX_WARNING
 
         val errorObserver = mockk<Observer<String?>>(relaxed = true)
-        viewModel.errorMessageLiveData.observeForever(errorObserver)
+        viewModel.warningMessageLiveData.observeForever(errorObserver)
 
         val displayStateObserver = mockk<Observer<Int?>>(relaxed = true)
         viewModel.displayStateLiveData.observeForever(displayStateObserver)
@@ -112,10 +112,10 @@ class WeighingListViewModelTest : BaseTest() {
         /** Results */
         verify {
             displayStateObserver.onChanged(viewModel.displayStateLiveData.value)
-            errorObserver.onChanged(viewModel.errorMessageLiveData.value)
+            errorObserver.onChanged(viewModel.warningMessageLiveData.value)
         }
 
-        Assert.assertEquals(mockDisplayState, CHILD_INDEX_ERROR)
+        Assert.assertEquals(mockDisplayState, CHILD_INDEX_WARNING)
         Assert.assertEquals(mockErrorMessage, "something wrong")
     }
 

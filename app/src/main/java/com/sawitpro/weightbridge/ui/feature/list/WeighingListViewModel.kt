@@ -7,9 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.sawitpro.weightbridge.data.core.DataResult
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.domain.repository.WeighBridgetRepository
-import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_ERROR
+import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_WARNING
 import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_LOADING
 import com.sawitpro.weightbridge.util.Constant.CHILD_INDEX_SUCCESS
+import com.sawitpro.weightbridge.util.Constant.DATA_IS_EMPTY
 import kotlinx.coroutines.launch
 
 class WeighingListViewModel(
@@ -22,8 +23,8 @@ class WeighingListViewModel(
     private val _displayStateLiveData: MutableLiveData<Int> = MutableLiveData()
     val displayStateLiveData: LiveData<Int> get() = _displayStateLiveData
 
-    private val _errorMessageLiveData: MutableLiveData<String?> = MutableLiveData()
-    val errorMessageLiveData: LiveData<String?> get() = _errorMessageLiveData
+    private val _warningMessageLiveData: MutableLiveData<String?> = MutableLiveData()
+    val warningMessageLiveData: LiveData<String?> get() = _warningMessageLiveData
 
     init {
         fetchWeighingList()
@@ -38,13 +39,20 @@ class WeighingListViewModel(
                     }
 
                     is DataResult.Success -> {
-                        _displayStateLiveData.value = CHILD_INDEX_SUCCESS
-                        _weighingListLiveData.value = result.body
+                        val data = result.body
+
+                        if (data.isEmpty()) {
+                            _displayStateLiveData.value = CHILD_INDEX_WARNING
+                            _warningMessageLiveData.value = DATA_IS_EMPTY
+                        } else {
+                            _displayStateLiveData.value = CHILD_INDEX_SUCCESS
+                            _weighingListLiveData.value = data
+                        }
                     }
 
                     is DataResult.Error -> {
-                        _displayStateLiveData.value = CHILD_INDEX_ERROR
-                        _errorMessageLiveData.value = result.errorMessage
+                        _displayStateLiveData.value = CHILD_INDEX_WARNING
+                        _warningMessageLiveData.value = result.errorMessage
                     }
                 }
             }

@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.sawitpro.weightbridge.databinding.FragmentWeighingListBinding
 import com.sawitpro.weightbridge.ui.feature.base.BaseFragment
 import com.sawitpro.weightbridge.ui.feature.detail.AbstractWeighingCreateEditFragment.Companion.NAV_RESULT_UPDATED
-import com.sawitpro.weightbridge.util.orZero
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeighingListFragment : BaseFragment() {
@@ -49,6 +48,7 @@ class WeighingListFragment : BaseFragment() {
         btnAddTicket.setOnClickListener {
             navigateToCreate()
         }
+        // TODO: date not formatted
     }
 
     private fun setupAdapter() {
@@ -87,18 +87,18 @@ class WeighingListFragment : BaseFragment() {
             weighingAdapter?.submitList(it)
         }
 
-        //TODO: handle displaystate
+        viewModel.displayStateLiveData.observe(viewLifecycleOwner) {
+            binding.vfMain.displayedChild = it
+        }
+
+        viewModel.warningMessageLiveData.observe(viewLifecycleOwner) {
+            binding.layoutWarning.tvWarningMessage.text = it
+        }
 
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Boolean>(
             NAV_RESULT_UPDATED
         )?.observe(viewLifecycleOwner) { isUpdated ->
             if (isUpdated) viewModel.fetchWeighingList(true)
         }
-    }
-
-    companion object {
-        const val CHILD_INDEX_SUCCESS = 0
-        const val CHILD_INDEX_ERROR = 1
-        const val CHILD_INDEX_LOADING = 2
     }
 }

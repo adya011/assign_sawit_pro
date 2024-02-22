@@ -76,7 +76,7 @@ class WeighingEditViewModelTest : BaseTest() {
         val mockUid = "-NqxNttkoh63e0IITemA"
         val mockErrorMessage = "something wrong"
         val mockErrorCode = 500
-        val mockDisplayState = Constant.CHILD_INDEX_ERROR
+        val mockDisplayState = Constant.CHILD_INDEX_WARNING
         val mockRequestWeighingTicket = RequestCreateEditWeighingTicketEntity(
             driverName = "driver1",
             licenseNumber = "AAA",
@@ -115,7 +115,7 @@ class WeighingEditViewModelTest : BaseTest() {
             errorObserver.onChanged(viewModel.errorMessageLiveData.value)
         }
 
-        Assert.assertEquals(mockDisplayState, Constant.CHILD_INDEX_ERROR)
+        Assert.assertEquals(mockDisplayState, Constant.CHILD_INDEX_WARNING)
         Assert.assertEquals(mockErrorMessage, "something wrong")
     }
 
