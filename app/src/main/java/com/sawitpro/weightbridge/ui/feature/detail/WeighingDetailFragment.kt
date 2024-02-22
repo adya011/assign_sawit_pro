@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.databinding.FragmentWeighingDetailBinding
 import com.sawitpro.weightbridge.ui.feature.base.BaseFragment
+import com.sawitpro.weightbridge.util.formatDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeighingDetailFragment : BaseFragment() {
@@ -42,11 +43,11 @@ class WeighingDetailFragment : BaseFragment() {
         _binding = null
     }
 
-    private fun setupView() {
-        binding.ivBack.setOnClickListener {
+    private fun setupView() = with(binding) {
+        ivBack.setOnClickListener {
             findNavController().navigateUp()
         }
-        binding.btnEdit.setOnClickListener {
+        btnEdit.setOnClickListener {
             findNavController().navigate(
                 WeighingDetailFragmentDirections.actionOpenEdit(args.detailId)
             )
@@ -57,6 +58,7 @@ class WeighingDetailFragment : BaseFragment() {
         tvId.text = data.uId
         tvDriverName.text = data.driverName
         tvLicenseNum.text = data.licenseNumber
+        tvDate.text = data.date.formatDate()
         tvInbound.text = "Inbound: ${data.inboundWeight} kg"
         tvOutbound.text = "Outbound: ${data.outboundWeight} kg"
         tvNet.text = "Net: ${data.netWeight} kg"

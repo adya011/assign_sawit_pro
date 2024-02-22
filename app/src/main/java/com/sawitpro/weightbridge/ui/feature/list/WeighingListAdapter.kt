@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.databinding.ItemWeighingBinding
+import com.sawitpro.weightbridge.util.formatDate
 
 class WeighingListAdapter(
     private val onClick: (String) -> Unit,
@@ -30,7 +31,7 @@ class WeighingListAdapter(
         fun bind(item: WeighingTicketEntity) = with(binding) {
             tvDriverName.text = item.driverName
             tvLicenseNum.text = item.licenseNumber
-            tvDateTime.text = item.date
+            tvDate.text = item.date.formatDate()
             root.setOnClickListener {
                 onClick.invoke(item.uId)
             }

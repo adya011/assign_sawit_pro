@@ -1,8 +1,9 @@
 package com.sawitpro.weightbridge.util
 
 import android.text.Editable
+import android.util.Log
 import android.view.View
-import java.text.DecimalFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -39,4 +40,23 @@ fun View.setVisible() {
 fun getCurrentDate(): String {
     val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
     return sdf.format(Date())
+}
+
+fun String?.formatDate(): String {
+    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+    val date: Date?
+    var finalString = "-"
+
+    this?.let {
+        try {
+            date = formatter.parse(it)
+            date?.let { dateData ->
+                val newFormat = SimpleDateFormat("dd MMM yyyy", Locale.US)
+                finalString = newFormat.format(dateData)
+            }
+        } catch (e: ParseException) {
+            Log.e("error","ParseException convertToDdMmmYyyy : $e")
+        }
+    }
+    return finalString
 }
