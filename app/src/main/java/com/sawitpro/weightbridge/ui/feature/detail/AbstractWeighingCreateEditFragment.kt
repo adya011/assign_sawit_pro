@@ -34,7 +34,6 @@ abstract class AbstractWeighingCreateEditFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO: add explanation must online
         setupToolbar()
         setupView()
     }
