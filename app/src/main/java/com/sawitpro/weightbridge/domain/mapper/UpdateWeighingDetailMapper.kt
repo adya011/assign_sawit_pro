@@ -2,7 +2,6 @@ package com.sawitpro.weightbridge.domain.mapper
 
 import com.sawitpro.weightbridge.data.model.dto.WeighingTicketDto
 import com.sawitpro.weightbridge.data.model.entity.UpdateWeighingTicketEntity
-import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.domain.repository.core.DataMapper
 import com.sawitpro.weightbridge.util.orZero
 

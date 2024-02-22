@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.sawitpro.weightbridge.databinding.FragmentWeighingListBinding
 import com.sawitpro.weightbridge.ui.feature.base.BaseFragment
+import com.sawitpro.weightbridge.ui.feature.detail.AbstractWeighingCreateEditFragment.Companion.NAV_RESULT_UPDATED
+import com.sawitpro.weightbridge.util.orZero
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeighingListFragment : BaseFragment() {
@@ -29,7 +31,6 @@ class WeighingListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchWeighingList()
         setupView()
         setupObserver()
         setupAdapter()
@@ -39,7 +40,12 @@ class WeighingListFragment : BaseFragment() {
         super.onDestroy()
         _binding = null
     }
+
     private fun setupView() = with(binding) {
+        srlRefresh.setOnRefreshListener {
+            viewModel.fetchWeighingList(true)
+            srlRefresh.isRefreshing = true
+        }
         btnAddTicket.setOnClickListener {
             navigateToCreate()
         }
@@ -77,7 +83,16 @@ class WeighingListFragment : BaseFragment() {
 
     private fun setupObserver() {
         viewModel.weighingListLiveData.observe(viewLifecycleOwner) {
+            binding.srlRefresh.isRefreshing = false
             weighingAdapter?.submitList(it)
+        }
+
+        //TODO: handle displaystate
+
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Boolean>(
+            NAV_RESULT_UPDATED
+        )?.observe(viewLifecycleOwner) { isUpdated ->
+            if (isUpdated) viewModel.fetchWeighingList(true)
         }
     }
 }

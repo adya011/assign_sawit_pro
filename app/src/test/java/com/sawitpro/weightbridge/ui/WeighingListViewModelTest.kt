@@ -34,18 +34,18 @@ class WeighingListViewModelTest : BaseTest() {
                 driverName = "driver1",
                 licenseNumber = "AAA",
                 date = "13 Sep 23",
-                inboundWeight = 13,
-                outboundWeight = 12,
-                netWeight = 1
+                inboundWeight = 13.0,
+                outboundWeight = 12.0,
+                netWeight = 1.0
             ),
             WeighingTicketEntity(
                 uId = "-NqxNttkoh63e0IITemB",
                 driverName = "driver2",
                 licenseNumber = "BBB",
                 date = "20 Jan 23",
-                inboundWeight = 23,
-                outboundWeight = 21,
-                netWeight = 1
+                inboundWeight = 23.0,
+                outboundWeight = 21.0,
+                netWeight = 1.0
             )
         )
 
@@ -53,7 +53,7 @@ class WeighingListViewModelTest : BaseTest() {
         viewModel.weighingListLiveData.observeForever(weighingListObserver)
 
         val flowResult = flow { emit(DataResult.Success(mockWeighingResultData)) }
-        coEvery { weighingRepo.getWeighingList() } returns flowResult
+        coEvery { weighingRepo.getWeighingList(false) } returns flowResult
 
         /** Test start */
         viewModel.fetchWeighingList()
@@ -76,7 +76,7 @@ class WeighingListViewModelTest : BaseTest() {
         viewModel.weighingListLiveData.observeForever(weighingListObserver)
 
         val flowResult = flow { emit(DataResult.Success(mockWeighingResultData)) }
-        coEvery { weighingRepo.getWeighingList() } returns flowResult
+        coEvery { weighingRepo.getWeighingList(false) } returns flowResult
 
         /** Test start */
         viewModel.fetchWeighingList()
@@ -104,7 +104,7 @@ class WeighingListViewModelTest : BaseTest() {
         viewModel.displayStateLiveData.observeForever(displayStateObserver)
 
         val flowResult = flow { emit(DataResult.Error<List<WeighingTicketEntity>>(mockErrorMessage, mockErrorCode)) }
-        coEvery { weighingRepo.getWeighingList() } returns flowResult
+        coEvery { weighingRepo.getWeighingList(false) } returns flowResult
 
         /** Test start */
         viewModel.fetchWeighingList()
@@ -128,7 +128,7 @@ class WeighingListViewModelTest : BaseTest() {
         viewModel.displayStateLiveData.observeForever(displayStateObserver)
 
         val flowResult = flow { emit(DataResult.Loading<List<WeighingTicketEntity>>()) }
-        coEvery { weighingRepo.getWeighingList() } returns flowResult
+        coEvery { weighingRepo.getWeighingList(false) } returns flowResult
 
         /** Test start */
         viewModel.fetchWeighingList()

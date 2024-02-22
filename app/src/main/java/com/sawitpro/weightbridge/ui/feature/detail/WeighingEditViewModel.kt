@@ -24,8 +24,8 @@ class WeighingEditViewModel(
     private val _ticketDetailLiveData: MutableLiveData<WeighingTicketEntity> = MutableLiveData()
     val ticketDetailLiveData: LiveData<WeighingTicketEntity> get() = _ticketDetailLiveData
 
-    private val _displayStateLiveData: MutableLiveData<Int> = MutableLiveData()
-    val displayStateLiveData: LiveData<Int> get() = _displayStateLiveData
+    private val _loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val loadingLiveData: LiveData<Boolean> get() = _loadingLiveData
 
     private val _errorMessageLiveData: MutableLiveData<String> = MutableLiveData()
     val errorMessageLiveData: LiveData<String> get() = _errorMessageLiveData
@@ -41,16 +41,16 @@ class WeighingEditViewModel(
             repository.updateWeighingDetail(uId, request).collect { result ->
                 when (result) {
                     is DataResult.Loading -> {
-                        _displayStateLiveData.value = Constant.CHILD_INDEX_LOADING
+                        _loadingLiveData.value = true
                     }
 
                     is DataResult.Success -> {
-                        _displayStateLiveData.value = Constant.CHILD_INDEX_SUCCESS
+                        _loadingLiveData.value = false
                         _updateWeighingDetailLiveData.postValue(result.body)
                     }
 
                     is DataResult.Error -> {
-                        _displayStateLiveData.value = Constant.CHILD_INDEX_ERROR
+                        _loadingLiveData.value = false
                         _errorMessageLiveData.value = result.errorMessage
                     }
                 }

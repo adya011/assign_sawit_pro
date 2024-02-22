@@ -14,8 +14,8 @@ class UpdateWEighingDetailMapper {
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
-            inboundWeight = 13,
-            outboundWeight = 12
+            inboundWeight = 13.0,
+            outboundWeight = 12.0
         )
         val result = mapper.mapDataModel(dtoData)
 

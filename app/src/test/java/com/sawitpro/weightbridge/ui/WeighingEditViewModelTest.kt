@@ -33,17 +33,17 @@ class WeighingEditViewModelTest : BaseTest() {
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
-            inboundWeight = 13,
-            outboundWeight = 12,
-            netWeight = 1
+            inboundWeight = 13.0,
+            outboundWeight = 12.0,
+            netWeight = 1.0
         )
         val mockRequestWeighingTicket = RequestCreateEditWeighingTicketEntity(
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
-            inboundWeight = 13,
-            outboundWeight = 12,
-            netWeight = 1
+            inboundWeight = 13.0,
+            outboundWeight = 12.0,
+            netWeight = 1.0
         )
 
         val updateWeighingObserver = mockk<Observer<UpdateWeighingTicketEntity?>>(relaxed = true)
@@ -82,16 +82,16 @@ class WeighingEditViewModelTest : BaseTest() {
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
-            inboundWeight = 13,
-            outboundWeight = 12,
-            netWeight = 1
+            inboundWeight = 13.0,
+            outboundWeight = 12.0,
+            netWeight = 1.0
         )
 
         val errorObserver = mockk<Observer<String?>>(relaxed = true)
         viewModel.errorMessageLiveData.observeForever(errorObserver)
 
-        val displayStateObserver = mockk<Observer<Int?>>(relaxed = true)
-        viewModel.displayStateLiveData.observeForever(displayStateObserver)
+        val loadingObserver = mockk<Observer<Boolean?>>(relaxed = true)
+        viewModel.loadingLiveData.observeForever(loadingObserver)
 
         val flowResult = flow {
             emit(
@@ -113,7 +113,7 @@ class WeighingEditViewModelTest : BaseTest() {
 
         /** Results */
         verify {
-            displayStateObserver.onChanged(viewModel.displayStateLiveData.value)
+            loadingObserver.onChanged(viewModel.loadingLiveData.value)
             errorObserver.onChanged(viewModel.errorMessageLiveData.value)
         }
 
@@ -130,13 +130,13 @@ class WeighingEditViewModelTest : BaseTest() {
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
-            inboundWeight = 13,
-            outboundWeight = 12,
-            netWeight = 1
+            inboundWeight = 13.0,
+            outboundWeight = 12.0,
+            netWeight = 1.0
         )
 
-        val displayStateObserver = mockk<Observer<Int?>>(relaxed = true)
-        viewModel.displayStateLiveData.observeForever(displayStateObserver)
+        val loadingObserver = mockk<Observer<Boolean?>>(relaxed = true)
+        viewModel.loadingLiveData.observeForever(loadingObserver)
 
         val flowResult = flow { emit(DataResult.Loading<UpdateWeighingTicketEntity>()) }
         coEvery {
@@ -151,7 +151,7 @@ class WeighingEditViewModelTest : BaseTest() {
 
         /** Results */
         verify {
-            displayStateObserver.onChanged(viewModel.displayStateLiveData.value)
+            loadingObserver.onChanged(viewModel.loadingLiveData.value)
         }
 
         Assert.assertEquals(mockDisplayState, Constant.CHILD_INDEX_LOADING)

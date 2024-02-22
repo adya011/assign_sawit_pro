@@ -1,6 +1,9 @@
 package com.sawitpro.buildsrc
 
 object AndroidLibraries {
+    // UI
+    const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayout}"
+
     // Dependency Injection
     const val koin = "io.insert-koin:koin-android:${Versions.koin}"
     const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
@@ -45,4 +48,5 @@ object Versions {
     const val okHttp = "5.0.0-alpha.11"
     const val moshiConverter = "2.0.0"
     const val room = "2.4.0"
+    const val swipeRefreshLayout = "1.1.0"
 }

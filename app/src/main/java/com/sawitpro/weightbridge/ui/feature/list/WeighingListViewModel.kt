@@ -25,9 +25,13 @@ class WeighingListViewModel(
     private val _errorMessageLiveData: MutableLiveData<String?> = MutableLiveData()
     val errorMessageLiveData: LiveData<String?> get() = _errorMessageLiveData
 
-    fun fetchWeighingList() {
+    init {
+        fetchWeighingList()
+    }
+
+    fun fetchWeighingList(isRefresh: Boolean = false) {
         viewModelScope.launch {
-            repository.getWeighingList().collect { result ->
+            repository.getWeighingList(isRefresh).collect { result ->
                 when (result) {
                     is DataResult.Loading -> {
                         _displayStateLiveData.value = CHILD_INDEX_LOADING
@@ -35,7 +39,7 @@ class WeighingListViewModel(
 
                     is DataResult.Success -> {
                         _displayStateLiveData.value = CHILD_INDEX_SUCCESS
-                        _weighingListLiveData.postValue(result.body)
+                        _weighingListLiveData.value = result.body
                     }
 
                     is DataResult.Error -> {

@@ -23,13 +23,15 @@ class WeighBridgeRepositoryImpl(
     override suspend fun getWeighingDetail(uId: String): WeighingTicketEntity =
         localData.getWeighingTicketDetail(uId)
 
-    override suspend fun getWeighingList(): Flow<DataResult<List<WeighingTicketEntity>>> =
+    override suspend fun getWeighingList(isRefresh: Boolean): Flow<DataResult<List<WeighingTicketEntity>>> =
         dataSourceHandling(
             networkCall = { api.getWeighingList() },
             mapper = WeighingListMapper(),
             getFromDb = { localData.getWeighingTicketList() },
-            saveToDb = { localData.insertWeighingTicket(it) }
+            saveToDb = { localData.insertWeighingTicket(it) },
+            isGetFromApi = isRefresh
         ).flowOn(Dispatchers.IO)
+
 
     override suspend fun setWeighingDetail(request: RequestCreateEditWeighingTicketEntity): Flow<DataResult<SetWeighingTicketEntity>> =
         dataSourceHandling(

@@ -1,19 +1,23 @@
 package com.sawitpro.weightbridge.ui.feature.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sawitpro.weightbridge.data.model.entity.RequestCreateEditWeighingTicketEntity
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
+import com.sawitpro.weightbridge.util.getCurrentDate
+import com.sawitpro.weightbridge.util.toDouble
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WeighingEditFragment : WeighingCreateEditFragment() {
+class WeighingEditFragment : AbstractWeighingCreateEditFragment() {
 
     private val viewModel by viewModel<WeighingEditViewModel>()
 
     private val args by navArgs<WeighingEditFragmentArgs>()
 
-    override fun getToolbarTitle(): String = "Edit Weighing Detail"
+    override fun getToolbarTitle(): String = TITLE_EDIT_TICKET
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,28 +25,28 @@ class WeighingEditFragment : WeighingCreateEditFragment() {
         viewModel.getDetail(args.detailId)
     }
 
+    override fun submitData() = with(binding) {
+        viewModel.updateWeighingDetail(
+            uId = tvValueId.text.toString(),
+            request = RequestCreateEditWeighingTicketEntity(
+                driverName = etDriverName.text.toString(),
+                licenseNumber = etLicenseNum.text.toString(),
+                date = getCurrentDate(),
+                inboundWeight = etInboundWeight.text.toDouble(),
+                outboundWeight = etOutboundWeight.text.toDouble(),
+                netWeight = netWeight
+            )
+        )
+    }
+
     private fun setupViews(data: WeighingTicketEntity) = with(binding) {
         tvValueId.text = data.uId
         etDriverName.setText(data.driverName)
         etLicenseNum.setText(data.licenseNumber)
-        etDate.setText(data.date)
         etInboundWeight.setText(data.inboundWeight.toString())
         etOutboundWeight.setText(data.outboundWeight.toString())
         etNetWeight.setText(netWeight.toString())
-
-        btnApply.setOnClickListener {
-            viewModel.updateWeighingDetail(
-                uId = data.uId,
-                request = RequestCreateEditWeighingTicketEntity(
-                    driverName = etDriverName.text.toString(),
-                    licenseNumber = etLicenseNum.text.toString(),
-                    date = etDate.text.toString(),
-                    inboundWeight = etInboundWeight.text.toString().toInt(),
-                    outboundWeight = etOutboundWeight.text.toString().toInt(),
-                    netWeight = netWeight
-                )
-            )
-        }
+        btnApply.isEnabled = true
     }
 
     private fun setupObserver() {
@@ -54,6 +58,19 @@ class WeighingEditFragment : WeighingCreateEditFragment() {
             showToast(it)
         }
 
-        //TODO: loading state
+        viewModel.updateWeighingDetailLiveData.observe(viewLifecycleOwner) {
+            showToast(SUCCESS_UPDATE_TICKET)
+            findNavController().previousBackStackEntry?.savedStateHandle?.set(NAV_RESULT_UPDATED, true)
+            findNavController().popBackStack()
+        }
+
+        viewModel.loadingLiveData.observe(viewLifecycleOwner) {
+            if (it) showFullLoading() else hideFullLoading()
+        }
+    }
+
+    companion object {
+        const val TITLE_EDIT_TICKET = "Edit Weighing Ticket"
+        const val SUCCESS_UPDATE_TICKET = "Ticket Updated!"
     }
 }

@@ -44,20 +44,20 @@ class WeighBridgeRepositoryTest : BaseTest() {
                     driverName = "driver1",
                     licenseNumber = "AC 4321 DE",
                     date = "2024-02-09",
-                    inboundWeight = 13,
-                    outboundWeight = 12
+                    inboundWeight = 13.0,
+                    outboundWeight = 12.0
                 ),
                 "-Nr1DQZKrjc-gfcJbQCE" to WeighingTicketDto(
                     driverName = "driver2",
                     licenseNumber = "AB 1234 CD",
                     date = "2024-02-09",
-                    inboundWeight = 15,
-                    outboundWeight = 14
+                    inboundWeight = 15.0,
+                    outboundWeight = 14.0
                 )
             )
         )
 
-        repo.getWeighingList().test {
+        repo.getWeighingList(false).test {
             assertEquals(
                 DataResult.Loading<List<WeighingTicketEntity>>(),
                 awaitItem()
@@ -71,18 +71,18 @@ class WeighBridgeRepositoryTest : BaseTest() {
                             driverName = "driver1",
                             licenseNumber = "AC 4321 DE",
                             date = "2024-02-09",
-                            inboundWeight = 13,
-                            outboundWeight = 12,
-                            netWeight = 1
+                            inboundWeight = 13.0,
+                            outboundWeight = 12.0,
+                            netWeight = 1.0
                         ),
                         WeighingTicketEntity(
                             uId = "-Nr1DQZKrjc-gfcJbQCE",
                             driverName = "driver2",
                             licenseNumber = "AB 1234 CD",
                             date = "2024-02-09",
-                            inboundWeight = 15,
-                            outboundWeight = 14,
-                            netWeight = 1
+                            inboundWeight = 15.0,
+                            outboundWeight = 14.0,
+                            netWeight = 1.0
                         )
                     )
                 ),
@@ -111,7 +111,7 @@ class WeighBridgeRepositoryTest : BaseTest() {
             "{\"errorMessage\":\"error\",\"code\":\"400\"}".toResponseBody("application/json".toMediaTypeOrNull())
         )
 
-        repo.getWeighingList().test {
+        repo.getWeighingList(false).test {
             assertEquals(
                 DataResult.Loading<List<WeighingTicketEntity>>(),
                 awaitItem()
@@ -138,9 +138,9 @@ class WeighBridgeRepositoryTest : BaseTest() {
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
-            inboundWeight = 13,
-            outboundWeight = 12,
-            netWeight = 1
+            inboundWeight = 13.0,
+            outboundWeight = 12.0,
+            netWeight = 1.0
         )
 
         coEvery {
@@ -186,9 +186,9 @@ class WeighBridgeRepositoryTest : BaseTest() {
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
-            inboundWeight = 13,
-            outboundWeight = 12,
-            netWeight = 1
+            inboundWeight = 13.0,
+            outboundWeight = 12.0,
+            netWeight = 1.0
         )
 
         coEvery {
@@ -226,9 +226,9 @@ class WeighBridgeRepositoryTest : BaseTest() {
             driverName = "driver1",
             licenseNumber = "AC 4321 DE",
             date = "2024-02-09",
-            inboundWeight = 13,
-            outboundWeight = 12,
-            netWeight = 1
+            inboundWeight = 13.0,
+            outboundWeight = 12.0,
+            netWeight = 1.0
         )
 
         coEvery {
@@ -241,8 +241,8 @@ class WeighBridgeRepositoryTest : BaseTest() {
                 driverName = "driver1",
                 licenseNumber = "AC 4321 DE",
                 date = "2024-02-09",
-                inboundWeight = 13,
-                outboundWeight = 12
+                inboundWeight = 13.0,
+                outboundWeight = 12.0
             )
         )
 
@@ -258,9 +258,9 @@ class WeighBridgeRepositoryTest : BaseTest() {
                         driverName = "driver1",
                         licenseNumber = "AC 4321 DE",
                         date = "2024-02-09",
-                        inboundWeight = 13,
-                        outboundWeight = 12,
-                        netWeight = 1
+                        inboundWeight = 13.0,
+                        outboundWeight = 12.0,
+                        netWeight = 1.0
                     )
                 ),
                 awaitItem()
@@ -285,9 +285,9 @@ class WeighBridgeRepositoryTest : BaseTest() {
             driverName = "driver1",
             licenseNumber = "AAA",
             date = "13 Sep 23",
-            inboundWeight = 13,
-            outboundWeight = 12,
-            netWeight = 1
+            inboundWeight = 13.0,
+            outboundWeight = 12.0,
+            netWeight = 1.0
         )
 
         coEvery {

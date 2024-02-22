@@ -15,15 +15,15 @@ class WeighingListMapperTest {
                 driverName = "driver1",
                 licenseNumber = "AAA",
                 date = "13 Sep 23",
-                inboundWeight = 13,
-                outboundWeight = 12
+                inboundWeight = 13.0,
+                outboundWeight = 12.0
             ),
             "-Nr1DQZKrjc-gfcJbQCE" to WeighingTicketDto(
                 driverName = "Yayan",
                 licenseNumber = "141231AC",
                 date = "2024-02-09",
-                inboundWeight = 15,
-                outboundWeight = 14
+                inboundWeight = 15.0,
+                outboundWeight = 14.0
             )
         )
         val result = mapper.mapDataModel(dtoData)

@@ -45,11 +45,12 @@ suspend fun <Source : Any, Result : Any> dataSourceHandling(
     networkCall: suspend () -> Response<Source>,
     mapper: DataMapper<Source, Result>,
     getFromDb: () -> Result,
-    saveToDb: (Result) -> Unit
+    saveToDb: (Result) -> Unit,
+    isGetFromApi: Boolean = false
 ): Flow<DataResult<Result>> = flow {
     emit(DataResult.Loading())
 
-    if (getFromDb.invoke().toString() in listOf("[]", "null", "")) {
+    if (getFromDb.invoke().toString() in listOf("[]", "null", "") || isGetFromApi) {
         try {
             val response = withTimeout(10000) { networkCall.invoke() }
 

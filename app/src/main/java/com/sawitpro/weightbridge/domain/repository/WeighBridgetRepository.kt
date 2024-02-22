@@ -11,7 +11,7 @@ interface WeighBridgetRepository {
 
     suspend fun getWeighingDetail(uId: String): WeighingTicketEntity
 
-    suspend fun getWeighingList(): Flow<DataResult<List<WeighingTicketEntity>>>
+    suspend fun getWeighingList(isRefresh: Boolean): Flow<DataResult<List<WeighingTicketEntity>>>
 
     suspend fun setWeighingDetail(
         request: RequestCreateEditWeighingTicketEntity
