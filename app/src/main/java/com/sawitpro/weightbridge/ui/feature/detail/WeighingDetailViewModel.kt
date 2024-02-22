@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sawitpro.weightbridge.data.model.entity.WeighingTicketEntity
 import com.sawitpro.weightbridge.domain.repository.WeighBridgetRepository
-import com.sawitpro.weightbridge.util.Constant
 import com.sawitpro.weightbridge.util.Constant.DATA_NOT_AVAILABLE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

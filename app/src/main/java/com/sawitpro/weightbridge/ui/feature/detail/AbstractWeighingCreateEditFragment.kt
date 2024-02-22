@@ -11,7 +11,6 @@ import com.sawitpro.weightbridge.ui.feature.base.BaseFragment
 import com.sawitpro.weightbridge.util.format
 import com.sawitpro.weightbridge.util.formatDouble
 import com.sawitpro.weightbridge.util.toDouble
-import java.text.DecimalFormat
 
 abstract class AbstractWeighingCreateEditFragment : BaseFragment() {
 

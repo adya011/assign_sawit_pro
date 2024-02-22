@@ -7,7 +7,6 @@ import com.sawitpro.weightbridge.data.model.entity.RequestCreateEditWeighingTick
 import com.sawitpro.weightbridge.util.getCurrentDate
 import com.sawitpro.weightbridge.util.setGone
 import com.sawitpro.weightbridge.util.toDouble
-import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeighingCreateFragment : AbstractWeighingCreateEditFragment() {

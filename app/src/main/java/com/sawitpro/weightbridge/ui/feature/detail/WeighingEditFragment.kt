@@ -1,7 +1,6 @@
 package com.sawitpro.weightbridge.ui.feature.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs

@@ -22,7 +22,7 @@ abstract class BaseTest {
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
-    val testDispatchers = UnconfinedTestDispatcher()
+    private val testDispatchers = UnconfinedTestDispatcher()
 
     lateinit var weighingRepo: WeighBridgetRepository
     lateinit var dao: WeighingTicketDao
