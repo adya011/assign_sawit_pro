@@ -14,8 +14,8 @@ class WeighingCreateViewModel(
     private val repository: WeighBridgetRepository
 ) : ViewModel() {
 
-    private val _setWeighingDetailLiveData: MutableLiveData<SetWeighingTicketEntity> = MutableLiveData()
-    val setWeighingDetailLiveData: LiveData<SetWeighingTicketEntity> get() = _setWeighingDetailLiveData
+    private val _setWeighingDetailLiveData: MutableLiveData<SetWeighingTicketEntity?> = MutableLiveData()
+    val setWeighingDetailLiveData: LiveData<SetWeighingTicketEntity?> get() = _setWeighingDetailLiveData
 
     private val _loadingLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val loadingLiveData: LiveData<Boolean> get() = _loadingLiveData
